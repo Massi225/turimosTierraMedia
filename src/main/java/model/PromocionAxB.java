@@ -5,10 +5,10 @@ import java.util.List;
 
 public class PromocionAxB extends Promocion {
 	private Atraccion atrGratis;
-	ArrayList<Atraccion> atracciones;
+	private List<Atraccion> atracciones;
 	private String tipoPromocion;
 
-	public PromocionAxB(int idPromo, ArrayList<Atraccion> atracciones, Atraccion atrGratis, String nombre,
+	public PromocionAxB(int idPromo, List<Atraccion> atracciones, Atraccion atrGratis, String nombre,
 			TipoAtraccion tipoAtraccion) {
 		super(idPromo, nombre, atracciones, tipoAtraccion);
 		this.atrGratis = atrGratis;
@@ -31,15 +31,22 @@ public class PromocionAxB extends Promocion {
 		return atracciones.get(atracciones.size() - 1).getNombre();
 	}
 
-	@Override
+	/*@Override
 	public String toString() {
 		return nombre + "--" + " " + "precio:" + this.getPrecio() + " " + "tiempo:" + " " + this.getTiempoPromocion()
 				+ " " + "cupo:" + this.getCupo() + " " + atracciones + " " + "Tendra gratis:" + this.visitaGratis();
-	}
+	}*/
+	
 
 	@Override
 	public String tipoPromocion() {
 		return "AxB";
+	}
+
+	@Override
+	public String toString() {
+		return "PromocionAxB [atrGratis=" + atrGratis + ", atracciones=" + atracciones + ", tipoPromocion="
+				+ tipoPromocion + "]";
 	}
 
 	@Override

@@ -6,6 +6,7 @@ import java.util.List;
 
 import model.Atraccion;
 import model.Attraction;
+import model.PromoPorcentual;
 import model.Promocion;
 import model.TipoAtraccion;
 import persistence.AttractionDAO;
@@ -18,20 +19,27 @@ public class PromocionService {
 			return DAOFactory.getPromocionDAO().findAll();
 		}
 
-		public Promocion create(String nombre, Integer costo, Double tiempo, TipoAtraccion tipoatraccion) {
-			
-
-			Promocion promocion = new Promocion(name, cost, duration, capacity);
-
-			if (attraction.isValid()) {
-				AttractionDAO attractionDAO = DAOFactory.getAttractionDAO();
-				attractionDAO.insert(attraction);
+		/*public Promocion create(String nombre, String atraccion1, String atraccion2, TipoAtraccion tipoatraccion, int numero) {
+	
+             if (numero == 1) {  
+			Promocion promocion = new PromoPorcentual(nombre, atracciones, tipoatraccion);
+             }
+             if(numero==2)
+            	 Promocion promocion = new PromoPorcentual(nombre, atracciones, tipoatraccion);
+             if (numero ==3) {
+            	 {
+            		Promocion promocion = new PromoPorcentual(nombre, atracciones, tipoatraccion);
+            	 }
+             }
+			if (promocion.isValid()) {
+				PromocionDAO promocionDAO = DAOFactory.getPromocionDAO();
+				promocionDAO.insert(attraction);
 				// XXX: si no devuelve "1", es que hubo más errores
 			}
 
 			return attraction;
 		}
-
+*/
 	/*	public Promocion update(Integer idPromocion, String nombre, ArrayList<Atraccion> atracciones, TipoAtraccion tipoAtraccion) {
 
 			PromocionDAO promocionDAO = DAOFactory.getPromocionDAO();

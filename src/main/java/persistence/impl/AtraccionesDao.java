@@ -40,13 +40,13 @@ import model.Promocion;
 			Double duracion = resultSet.getDouble("tiempo");
 			Integer cupoPersonas = resultSet.getInt("cupo");
 			Integer tipo2 = (resultSet.getInt("tipo"));
-			TipoAtraccion tipo = Promocion.getPreferenciaPromo2(tipo2);
+			TipoAtraccion tipo = Promocion.getPreferenciaPromo2(resultSet.getInt("cupo"));
 			Atraccion atraccion = new Atraccion(idAtraccion, nombre, precio, duracion, cupoPersonas, tipo);
 			
 			return atraccion;
 		}
 
-		public List<Atraccion> findByName2(String nombre) throws SQLException {
+		public List<Atraccion> findByName(String nombre) throws SQLException {
 			List<Atraccion> atracciones = new ArrayList<Atraccion>();
 			Connection connection = ConnectionProvider.getConnection();
 			String query = "SELECT * " + "FROM atracciones "
@@ -61,7 +61,7 @@ import model.Promocion;
 			}
 			return atracciones;
 		}
-		public Atraccion findByName(String nombre) {
+		public Atraccion findByName2(String nombre) {
 			try {
 				String sql = "SELECT * " + "FROM atracciones "
 						+ "JOIN tipo_atraccion ON tipo_atraccion.id_tipo = atracciones.tipo "

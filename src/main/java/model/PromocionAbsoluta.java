@@ -6,9 +6,9 @@ import java.util.List;
 public class PromocionAbsoluta extends Promocion {
 	private double valorPaquete;
 	private String tipoPromocion;
-	private ArrayList<Atraccion> atracciones;
+	private List<Atraccion> atracciones;
 
-	public PromocionAbsoluta(int idPromo, ArrayList<Atraccion> atracciones, Double valorPaquete, String nombre,
+	public PromocionAbsoluta(int idPromo, List<Atraccion> atracciones, Double valorPaquete, String nombre,
 			TipoAtraccion tipoAtraccion) {
 		super(idPromo, nombre, atracciones, tipoAtraccion);
 		this.setPrecio(valorPaquete);
@@ -29,15 +29,21 @@ public class PromocionAbsoluta extends Promocion {
 		this.valorPaquete = precio;
 	}
 
-	@Override
-	public String toString() {
+	//@Override
+	/*public String toString() {
 		return nombre + "--" + " " + "costo:" + valorPaquete + " " + "tiempo" + " " + this.getTiempoPromocion() + " "
 				+ "cupo:" + " " + this.getCupo() + atracciones;
-	}
+	}*/
 
 	@Override
 	public String tipoPromocion() {
 		return "Absoluta";
+	}
+
+	@Override
+	public String toString() {
+		return   super.idPromocion + "" + super.nombre + "" + super.atracciones + 
+				"" + super.tipoAtraccion +"" ; 
 	}
 
 	@Override

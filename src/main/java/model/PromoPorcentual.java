@@ -6,16 +6,17 @@ import java.util.List;
 
 public class PromoPorcentual extends Promocion {
 	private double porcentaje;
-	private ArrayList<Atraccion> atracciones;
+	private List<Atraccion> atracciones;
 	private String tipoPromocion;
 
-	public PromoPorcentual(int idPromocion, ArrayList<Atraccion> atracciones, double Porcent, String nombre,
+	public PromoPorcentual(int idPromocion, List<Atraccion> atracciones, double Porcent, String nombre,
 			TipoAtraccion tipoAtraccion) {
-		super(idPromocion, nombre, atracciones, tipoAtraccion);
+	    super(idPromocion, nombre, atracciones, tipoAtraccion);
 		this.atracciones = atracciones;
-		this.setPorcentaje(porcentaje);
+		this.setPorcentaje(Porcent);
 		this.tipoPromocion = "Porcentual";
 	}
+	
 
 	public double getPorcentaje() {
 		return porcentaje;
@@ -30,17 +31,24 @@ public class PromoPorcentual extends Promocion {
 		return Math.round(super.getPrecio() * ((100 - (this.porcentaje))/100));
 	}
 
-	@Override
+	/*@Override
 	public String toString() {
-		return nombre + "--" + " " + "precio:" + " " + this.getPrecio() + "tiempo:" + " " + this.getTiempoPromocion()
+		return super.getNombre() + "--" + " " + "precio:" + " " + this.getPrecio() + "tiempo:" + " " + this.getTiempoPromocion()
 				+ " " + "cupo:" + this.getCupo() + " " + atracciones + " " + " este valor tuvo un descuento de:"
 				+ porcentaje;
-	}
+	}*/
 
 	@Override
 	public String tipoPromocion() {
 		return "Porcentual";
 	}
+
+	@Override
+	public String toString() {
+		return  super.idPromocion +" "+ super.getCosto() + "  " + super.nombre + "  " + this.atracciones + 
+				"  " + super.tipoAtraccion +"  "; 
+	}
+
 
 	@Override
 	public double getTiempoPromocion() {

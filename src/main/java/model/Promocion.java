@@ -1,7 +1,9 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public abstract class Promocion  {
 	protected int idPromocion;
@@ -11,18 +13,38 @@ public abstract class Promocion  {
 	protected Double costo;
 	protected Double tiempo;
 
-	
+	private Map<String, String> errors;
 	
 		
-	public Promocion(int idPromocion, String nombre, ArrayList<Atraccion> atracciones, TipoAtraccion tipoAtraccion) {
-		this.idPromocion = idPromocion;
+	public TipoAtraccion getTipoAtraccion() {
+		return tipoAtraccion;
+	}
+
+	public Double getCosto() {
+		return costo;
+	}
+
+	public Double getTiempo() {
+		return tiempo;
+	}
+
+	
+	public Promocion( String nombre, List<Atraccion> atracciones, TipoAtraccion tipoAtraccion) {
+		super();
 		this.nombre = nombre;
 		this.setCosto(atracciones);
 		this.setTiempo(atracciones);
 		this.tipoAtraccion = tipoAtraccion;
 	}
-	
-
+	public Promocion(int idPromocion, String nombre, List<Atraccion> atracciones, TipoAtraccion tipoAtraccion) {
+		this.idPromocion = idPromocion;
+		this.nombre = nombre;
+		this.setCosto(atracciones);
+		this.setTiempo(atracciones);
+		this.tipoAtraccion = tipoAtraccion;
+	//	private Map<String, String> errors;
+	}
+/*
 	public Promocion(int idProducto, double costo, double tiempo, String nombreAtraccion,
 			TipoAtraccion tipoDeAtraccion) {
 		this.idPromocion = idProducto;
@@ -38,7 +60,45 @@ this.nombre = nombreAtraccion;
 this.costo = costo;
 this.tiempo = tiempo;
 	}
-	public void setTiempo(ArrayList<Atraccion> atrIncluidas) {
+	
+	
+	public Promocion(String nombre , double costo , double tiempo , List<Atraccion> atracciones, TipoAtraccion tipo) {
+		this.nombre = nombre;
+		this.getPrecio();
+		this.tiempo = tiempo;
+		this.tipoAtraccion = tipo;
+		this.atracciones = atracciones;
+		
+	}
+	*/
+	/*
+public boolean isValid() {
+		validate();
+		return errors.isEmpty();
+	}
+	
+	/*public void validate() {
+		errors = new HashMap<String, String>();
+
+		if ( costo<= 0) {
+			errors.put("costo", "Debe ser positivo");
+		}
+		if (tiempo <= 0) {
+			errors.put("duration", "Debe ser positivo");
+		}
+		if (tiempo > 60) {
+			errors.put("tiempo", "Excede el tiempo máximo");
+		}
+		if (capacity <= 0) {
+			errors.put("capacity", "Debe ser positivo");
+		}
+	}
+	
+	public Map<String, String> getErrors() {
+		return errors;
+	}*/
+	
+	public void setTiempo(List<Atraccion> atrIncluidas) {
 		double tiempo = 0;
 		for (int i = 0; i < atrIncluidas.size(); i++) {
 			tiempo += atrIncluidas.get(i).getDuracion();
@@ -46,7 +106,14 @@ this.tiempo = tiempo;
 		this.tiempo = tiempo;
 	}
 
-	public void setCosto(ArrayList<Atraccion> atrIncluidas) {
+	public Promocion(int idPromocion, String nombre, List<Atraccion> atracciones) {
+		super();
+		this.idPromocion = idPromocion;
+		this.nombre = nombre;
+		this.atracciones = atracciones;
+	}
+
+	public void setCosto(List<Atraccion> atrIncluidas) {
 		double costo = 0;
 		for (int i = 0; i < atrIncluidas.size(); i++) {
 			costo += atrIncluidas.get(i).getPrecio();
