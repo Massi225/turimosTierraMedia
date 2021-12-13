@@ -20,7 +20,7 @@ import model.Atraccion;
 	import model.TipoAtraccion;
 import model.User;
 import model.Usuario;
-import model.nullobjects.NullPromocion;
+
 import model.nullobjects.NullUser;
 import persistence.impl.AtraccionesDao;
 
@@ -70,7 +70,7 @@ import persistence.impl.AtraccionesDao;
 				atracIncluidas.add( atr.findByName(resultSet.getString(4)));
 			}
 			
-			Promocion promocion = new NullPromocion();
+			Promocion promocion = null;
 			
 			if (tipoPromocion.equalsIgnoreCase("porcentual")) {
 
