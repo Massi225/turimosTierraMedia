@@ -31,7 +31,7 @@ public class ListPromocionesServelt extends HttpServlet implements Servlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		List<Promocion> promociones = promocionService.list();
-		req.setAttribute("promocion", promociones);
+		req.setAttribute("promociones", promociones);
 
 		RequestDispatcher dispatcher = getServletContext()
 				.getRequestDispatcher("/views/promocion/index.jsp");

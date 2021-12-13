@@ -18,7 +18,8 @@ public class PromocionService {
 			return DAOFactory.getPromocionDAO().findAll();
 		}
 
-/*		public Promocion create(String name, Integer cost, Double duration, Integer capacity) {
+		/*public Promocion create(String name, Integer cost, Double duration, Integer capacity) {
+			
 
 			Promocion promocion = new Promocion(name, cost, duration, capacity);
 
@@ -29,8 +30,8 @@ public class PromocionService {
 			}
 
 			return attraction;
-		}
-*/
+		}*/
+
 	/*	public Promocion update(Integer idPromocion, String nombre, ArrayList<Atraccion> atracciones, TipoAtraccion tipoAtraccion) {
 
 			PromocionDAO promocionDAO = DAOFactory.getPromocionDAO();

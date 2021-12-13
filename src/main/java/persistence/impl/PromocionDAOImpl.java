@@ -18,18 +18,23 @@ import model.Atraccion;
 	import model.PromocionAxB;
 	import model.Promocion;
 	import model.TipoAtraccion;
-	import model.Usuario;
+import model.User;
+import model.Usuario;
+import model.nullobjects.NullPromocion;
+import model.nullobjects.NullUser;
+import persistence.impl.AtraccionesDao;
 
 	public class PromocionDAOImpl implements PromocionDAO {
 
 		public List<Promocion> findAll() {
 			try {
-			List<Promocion> promociones = new ArrayList<Promocion>();
+				String query = "SELECT * FROM promociones ";
 			Connection connection = ConnectionProvider.getConnection();
-			String query = "SELECT * FROM promociones JOIN tipo_atraccion ON tipo_atraccion.id_tipo = promociones.tipo_atraccion ";
 			PreparedStatement preparedStatement = connection.prepareStatement(query);
 			ResultSet resultSet = preparedStatement.executeQuery();
-
+			
+			List<Promocion> promociones = new ArrayList<Promocion>();
+			
 			while (resultSet.next()) {
 				promociones.add(toPromocion(resultSet));
 			}
@@ -39,43 +44,64 @@ import model.Atraccion;
 			}
 		}
 
+	
+		
 		private Promocion toPromocion(ResultSet resultSet) throws SQLException {
-			String tipoPromocion = String.valueOf(resultSet.getString("tipo_promo"));
+			
+			String tipoPromocion = resultSet.getString("tipo_promocion");
 
-			String nombrePromo = String.valueOf(resultSet.getString("nombre_promo"));
+			String nombrePromo = resultSet.getString("nombre");
 
-			TipoAtraccion tipoAtraccion = TipoAtraccion.valueOf(resultSet.getString("tipo"));
+			Integer tipoAtraccion2 = resultSet.getInt("tipo_Atraccion");
+			
+			
+		    TipoAtraccion tipoAtraccion = Promocion.getPreferenciaPromo2(tipoAtraccion2);
+			
+			AtraccionesDao atr = new AtraccionesDao();
 
-			PromocionDAO atr = DAOFactory.getPromocionDAO();
+			ArrayList<Atraccion> atracIncluidas = new ArrayList<Atraccion>();
 
-			ArrayList<Promocion> atracIncluidas = new ArrayList<Promocion>();
-
-			Promocion promocion = null;
+			
+		
 			if (resultSet.getString(3) != null) {
-				atracIncluidas.add((Atraccion) atr.findByName(resultSet.getString(3)));
-			}
+				atracIncluidas.add( atr.findByName(resultSet.getString(3)));
+		}
 			if (resultSet.getString(4) != null) {
-				atracIncluidas.add((Atraccion) atr.findByName(resultSet.getString(4)));
+				atracIncluidas.add( atr.findByName(resultSet.getString(4)));
 			}
+			
+			Promocion promocion = new NullPromocion();
+			
 			if (tipoPromocion.equalsIgnoreCase("porcentual")) {
 
-				promocion = new PromoPorcentual(resultSet.getInt("id_promocion"), atracIncluidas, resultSet.getDouble(6),
+			 promocion = new PromoPorcentual(resultSet.getInt("id_promocion"), atracIncluidas, resultSet.getDouble(6),
 						nombrePromo, tipoAtraccion);
+			 
+				
 			} else if (tipoPromocion.equalsIgnoreCase("AxB")) {
-
-				Atraccion ataxb = (Atraccion) atr.findByName(resultSet.getString(9));
+				
+				Atraccion ataxb = atr.findByName(resultSet.getString(9));
+				
 				promocion = new PromocionAxB(resultSet.getInt("id_promocion"), atracIncluidas, ataxb, nombrePromo,
 						tipoAtraccion);
+				
 			} else if (tipoPromocion.equalsIgnoreCase("Absoluta")) {
-
-				promocion = new PromocionAbsoluta(resultSet.getInt("id_promocion"), atracIncluidas, resultSet.getDouble(7),
+				
+			 promocion = new PromocionAbsoluta(resultSet.getInt("id_promocion"), atracIncluidas, resultSet.getDouble(7),
 						nombrePromo, tipoAtraccion);
+				
 			}
+			
+			
 			return promocion;
+			
 		}
 
-		public List<Promocion> findByName(String nombre) throws SQLException {
-			List<Promocion> promociones = new ArrayList<Promocion>();
+		public List<Promocion> findByName(String nombre)  {
+			
+			try{
+				List<Promocion> promociones = new ArrayList<Promocion>();
+			
 			Connection connection = ConnectionProvider.getConnection();
 			String query = "SELECT * FROM promociones "
 					+ "JOIN tipo_atraccion ON tipo_atraccion.id_tipo = promociones.tipo_atraccion WHERE promociones.nombre LIKE ? ";
@@ -87,27 +113,33 @@ import model.Atraccion;
 				promociones.add(promocion);
 			}
 			return promociones;
+		} catch (Exception e) {
+			throw new MissingDataException(e);
+		}
 		}
 
 		public int delete(Promocion promocion) {
-			try {
 			String sqlDeleteQuery = "DELETE FROM promociones WHERE promociones.nombre LIKE ? ";
-			Connection connection = ConnectionProvider.getConnection();
+			Connection connection;
+			try {
+				connection = ConnectionProvider.getConnection();
+			
 			PreparedStatement statement = connection.prepareStatement(sqlDeleteQuery);
 			statement.setString(1, promocion.getNombre());
 			int rowsUpdated = statement.executeUpdate();
+			
 			return rowsUpdated;
 			} catch (Exception e) {
 				throw new MissingDataException(e);
 			}
 		}
 
-		public int countAll()  {
+		public int countAll() {
 			// TODO Auto-generated method stub
 			return 0;
 		}
 
-		public int insert(Promocion t)  {
+		public int insert(Promocion t) {
 			// TODO Auto-generated method stub
 			return 0;
 		}
@@ -116,14 +148,26 @@ import model.Atraccion;
 			// TODO Auto-generated method stub
 			return 0;
 		}
+		
+		public Promocion find(Integer id_promocion) {
+			try {
+				String sql = "SELECT * FROM PROMOCIONES JOIN tipo_atraccion ON tipo_atraccion.id_tipo = promociones.tipo_atraccion WHERE id_promocion = ? ";
+				Connection conn = ConnectionProvider.getConnection();
+				PreparedStatement statement = conn.prepareStatement(sql);
+				statement.setInt(1, id_promocion);
+				ResultSet resultados = statement.executeQuery();
 
-		public Promocion findById(Integer id)  {
-			// TODO Auto-generated method stub
-			return null;
+				Promocion promocion = null;
+
+				if (resultados.next()) {
+					promocion = toPromocion(resultados);
+				}
+
+				return promocion;
+			} catch (Exception e) {
+				throw new MissingDataException(e);
+			}
 		}
-		public Promocion find(Integer id)  {
-			// TODO Auto-generated method stub
-			return null;
-	}
-	}
 
+		
+	}

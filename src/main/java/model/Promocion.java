@@ -11,6 +11,9 @@ public abstract class Promocion  {
 	protected Double costo;
 	protected Double tiempo;
 
+	
+	
+		
 	public Promocion(int idPromocion, String nombre, ArrayList<Atraccion> atracciones, TipoAtraccion tipoAtraccion) {
 		this.idPromocion = idPromocion;
 		this.nombre = nombre;
@@ -18,16 +21,23 @@ public abstract class Promocion  {
 		this.setTiempo(atracciones);
 		this.tipoAtraccion = tipoAtraccion;
 	}
+	
 
 	public Promocion(int idProducto, double costo, double tiempo, String nombreAtraccion,
 			TipoAtraccion tipoDeAtraccion) {
 		this.idPromocion = idProducto;
-		this.nombre = nombre;
+		this.nombre = nombreAtraccion;
 		this.costo = costo;
 		this.tiempo = tiempo;
 		this.tipoAtraccion = tipoDeAtraccion;
 	}
 
+	public Promocion (int idProducto, double costo, double tiempo, String nombreAtraccion){
+this.idPromocion = idProducto;
+this.nombre = nombreAtraccion;
+this.costo = costo;
+this.tiempo = tiempo;
+	}
 	public void setTiempo(ArrayList<Atraccion> atrIncluidas) {
 		double tiempo = 0;
 		for (int i = 0; i < atrIncluidas.size(); i++) {
@@ -46,12 +56,15 @@ public abstract class Promocion  {
 
 	public double getPrecio() {
 		double costoTotal = 0.0;
-		for (Atraccion atraccion : atracciones) {
+		for (Atraccion atraccion : this.atracciones) {
 			costoTotal += atraccion.getPrecio();
 		}
 		return costoTotal;
 	}
 
+	public boolean isNull() {
+		return false;
+	}
 	public String getNombre() {
 		return this.nombre;
 	}
@@ -121,7 +134,23 @@ public abstract class Promocion  {
 		}
 		return preferencia;
 	}
-
+	public static TipoAtraccion getPreferenciaPromo2(int n) {
+		TipoAtraccion preferencia = null;
+		switch(n) {
+		  case 1:
+			  preferencia = TipoAtraccion.PAISAJE;
+			  break;
+		  case 2:
+			  preferencia = TipoAtraccion.AVENTURA;
+			  break;
+		  case 3:
+			  preferencia = TipoAtraccion.DEGUSTACION;
+			  break;
+			  default :
+				  break;
+		}
+		return preferencia;
+	}
 	public int getIdPromocion() {
 		return idPromocion;
 	}
