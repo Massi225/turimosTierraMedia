@@ -16,6 +16,14 @@ public class PromocionAxB extends Promocion {
 		this.atracciones.add(atrGratis);
 		this.tipoPromocion = "AxB";
 	}
+	public PromocionAxB(List<Atraccion> atracciones, Atraccion atrGratis, String nombre,
+			TipoAtraccion tipoAtraccion) {
+		super(nombre, atracciones,tipoAtraccion);
+		this.atrGratis = atrGratis;
+		this.atracciones = atracciones;
+		this.atracciones.add(atrGratis);
+		this.tipoPromocion = "AxB";
+	}
 
 	@Override
 	public double getPrecio() {

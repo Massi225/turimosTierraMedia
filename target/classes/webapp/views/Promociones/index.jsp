@@ -53,9 +53,11 @@
    
    <tr>
 	<td><strong><c:out value="${promocion.nombre}"></c:out></strong><p>descripcion de la promocion</p></td>
-								<td><c:out value="${promocion.costo}"></c:out></td>
-								<td><c:out value="${promocion.tiempo}"></c:out></td>
-								<td><c:out value="${promocion.tipoAtraccion}"></c:out></td>
+	<td><c:out value="${promocion.costo}"></c:out></td>
+ <td><c:out value="${promocion.tiempo}"></c:out></td>
+<td><c:out value="${promocion.tipoAtraccion}"></c:out></td>
+
+
 								<td><c:if test="${user.admin}">
 								<a href="/turimosTierraMedia/promociones/edit.do?id=${promocion.idPromocion}"
 									class="btn btn-light rounded-0" role="button"><i

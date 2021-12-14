@@ -10,11 +10,11 @@ public class User {
 	private Integer id;
 	private String username, password;
 	private Boolean admin;
-	private Integer coins;
+	private Double coins;
 	private Double time;
 	private HashMap<String, String> errors;
 
-	public User(Integer id, String username, String password, Integer coins, Double time, Boolean admin) {
+	public User(Integer id, String username, String password, Double coins, Double time, Boolean admin) {
 		super();
 		this.id = id;
 		this.username = username;
@@ -27,6 +27,11 @@ public class User {
 	public void addToItinerary(Attraction attraction) {
 		this.coins -= attraction.getCost();
 		this.time -= attraction.getDuration();
+		// TODO agregar a su lista
+	}
+	public void addToItinerary(Promocion promocion) {
+		this.coins -= promocion.getCosto();
+		this.time -= promocion.getTiempo();
 		// TODO agregar a su lista
 	}
 
@@ -47,7 +52,7 @@ public class User {
 		return admin;
 	}
 
-	public Integer getCoins() {
+	public Double getCoins() {
 		return coins;
 	}
 
@@ -79,7 +84,7 @@ public class User {
 		this.admin = admin;
 	}
 
-	public void setCoins(Integer coins) {
+	public void setCoins(Double coins) {
 		this.coins = coins;
 	}
 

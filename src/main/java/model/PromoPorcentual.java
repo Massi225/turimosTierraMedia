@@ -8,6 +8,8 @@ public class PromoPorcentual extends Promocion {
 	private double porcentaje;
 	private List<Atraccion> atracciones;
 	private String tipoPromocion;
+	
+	
 
 	public PromoPorcentual(int idPromocion, List<Atraccion> atracciones, double Porcent, String nombre,
 			TipoAtraccion tipoAtraccion) {
@@ -15,8 +17,22 @@ public class PromoPorcentual extends Promocion {
 		this.atracciones = atracciones;
 		this.setPorcentaje(Porcent);
 		this.tipoPromocion = "Porcentual";
+		
+		
 	}
 	
+		
+	
+
+	public PromoPorcentual(List<Atraccion> lista, int dependeDeLapromo, String nombre, TipoAtraccion tipoAtraccion) {
+		super( nombre, lista, tipoAtraccion);
+		this.atracciones = atracciones;
+		this.setPorcentaje(dependeDeLapromo);
+		this.tipoPromocion = "Porcentual";
+	}
+
+
+
 
 	public double getPorcentaje() {
 		return porcentaje;
@@ -59,4 +75,5 @@ public class PromoPorcentual extends Promocion {
 	protected String visitaGratis() {
 		return "";
 	}
+	
 }

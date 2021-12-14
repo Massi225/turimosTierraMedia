@@ -15,7 +15,13 @@ public class PromocionAbsoluta extends Promocion {
 		this.atracciones = atracciones;
 		this.tipoPromocion = "Absoluta";
 	}
-
+	public PromocionAbsoluta( List<Atraccion> atracciones, Double valorPaquete, String nombre,
+			TipoAtraccion tipoAtraccion) {
+		super( nombre, atracciones, tipoAtraccion);
+		this.setPrecio(valorPaquete);
+		this.atracciones = atracciones;
+		this.tipoPromocion = "Absoluta";
+	}
 	@Override
 	public double getPrecio() {
 		return this.valorPaquete;

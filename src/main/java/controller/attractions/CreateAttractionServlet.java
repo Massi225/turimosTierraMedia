@@ -34,7 +34,7 @@ public class CreateAttractionServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String name = req.getParameter("name");
-		Integer cost = Integer.parseInt(req.getParameter("cost"));
+		Double cost = Double.parseDouble(req.getParameter("cost"));
 		Double duration = Double.parseDouble(req.getParameter("duration"));
 		Integer capacity = Integer.parseInt(req.getParameter("capacity"));
 

@@ -23,7 +23,7 @@ public class UserDAOImpl implements UserDAO {
 			PreparedStatement statement = conn.prepareStatement(sql);
 			statement.setString(1, user.getUsername());
 			statement.setString(2, user.getPassword());
-			statement.setInt(3, user.getCoins());
+			statement.setDouble(3, user.getCoins());
 			statement.setDouble(4, user.getTime());
 			int rows = statement.executeUpdate();
 
@@ -39,7 +39,7 @@ public class UserDAOImpl implements UserDAO {
 			Connection conn = ConnectionProvider.getConnection();
 
 			PreparedStatement statement = conn.prepareStatement(sql);
-			statement.setInt(1, user.getCoins());
+			statement.setDouble(1, user.getCoins());
 			statement.setDouble(2, user.getTime());
 			statement.setDouble(3, user.getId());
 			int rows = statement.executeUpdate();
@@ -142,7 +142,7 @@ public class UserDAOImpl implements UserDAO {
 
 	private User toUser(ResultSet userRegister) throws SQLException {
 		return new User(userRegister.getInt(1), userRegister.getString(2), userRegister.getString(3),
-				userRegister.getInt(5), userRegister.getDouble(6), userRegister.getBoolean(4));
+				userRegister.getDouble(5), userRegister.getDouble(6), userRegister.getBoolean(4));
 	}
 
 }

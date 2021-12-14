@@ -16,7 +16,7 @@
 </div>
 <div class="mb-3">
 	<label for="duration"
-		class='col-form-label ${attraction.errors.get("duration") != null ? "is-invalid" : "" }'>Duration:</label>
+		class='col-form-label ${attraction.errors.get("duration") != null ? "is-invalid" : "" }'>Duration2222222:</label>
 	<input class="form-control" type="number" id="duration" name="duration"
 		required value="${attraction.duration}"></input>
 	<div class="invalid-feedback">

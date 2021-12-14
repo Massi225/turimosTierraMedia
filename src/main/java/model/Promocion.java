@@ -12,6 +12,7 @@ public abstract class Promocion  {
 	protected TipoAtraccion tipoAtraccion;
 	protected Double costo;
 	protected Double tiempo;
+	protected Double cupo;
 
 	private Map<String, String> errors;
 	
@@ -35,6 +36,7 @@ public abstract class Promocion  {
 		this.setCosto(atracciones);
 		this.setTiempo(atracciones);
 		this.tipoAtraccion = tipoAtraccion;
+		this.setCupo(atracciones);
 	}
 	public Promocion(int idPromocion, String nombre, List<Atraccion> atracciones, TipoAtraccion tipoAtraccion) {
 		this.idPromocion = idPromocion;
@@ -42,6 +44,7 @@ public abstract class Promocion  {
 		this.setCosto(atracciones);
 		this.setTiempo(atracciones);
 		this.tipoAtraccion = tipoAtraccion;
+		this.setCupo(atracciones);
 	//	private Map<String, String> errors;
 	}
 /*
@@ -111,6 +114,21 @@ public boolean isValid() {
 		this.idPromocion = idPromocion;
 		this.nombre = nombre;
 		this.atracciones = atracciones;
+		this.setCupo(atracciones);
+	}
+
+	public void setCupo(List<Atraccion> atrIncluidas) {
+		double cupo = 0;
+		for (int i = 0; i < atrIncluidas.size(); i++) {
+			if (cupo == 0) {
+				cupo = atrIncluidas.get(i).getCupoPersonas();
+			}
+			if (cupo > atrIncluidas.get(i).getCupoPersonas()) {
+				cupo = atrIncluidas.get(i).getCupoPersonas();
+			}
+			
+	}
+		this.cupo = cupo;
 	}
 
 	public void setCosto(List<Atraccion> atrIncluidas) {
@@ -152,6 +170,8 @@ public boolean isValid() {
 		this.nombre = nombre;
 	}
 
+	
+	
 	public int getCupo() {
 		int cupo = 0;
 		for (Atraccion i : this.getAtracciones()) {

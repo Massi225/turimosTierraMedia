@@ -12,7 +12,7 @@ public class AttractionService {
 		return DAOFactory.getAttractionDAO().findAll();
 	}
 
-	public Attraction create(String name, Integer cost, Double duration, Integer capacity) {
+	public Attraction create(String name, Double cost, Double duration, Integer capacity) {
 
 		Attraction attraction = new Attraction(name, cost, duration, capacity);
 
@@ -25,7 +25,7 @@ public class AttractionService {
 		return attraction;
 	}
 
-	public Attraction update(Integer id, String name, Integer cost, Double duration, Integer capacity) {
+	public Attraction update(Integer id, String name, Double cost, Double duration, Integer capacity) {
 
 		AttractionDAO attractionDAO = DAOFactory.getAttractionDAO();
 		Attraction attraction = attractionDAO.find(id);

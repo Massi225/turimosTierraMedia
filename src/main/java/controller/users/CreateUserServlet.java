@@ -35,7 +35,7 @@ public class CreateUserServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String username = req.getParameter("username");
 		String password = req.getParameter("password");
-		Integer coins = Integer.parseInt(req.getParameter("coins"));
+		Double coins = Double.parseDouble(req.getParameter("coins"));
 		Double time = Double.parseDouble(req.getParameter("time"));
 
 		User tmp_user = userService.create(username, password, coins, time);
