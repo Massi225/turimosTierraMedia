@@ -19,7 +19,7 @@
 
 		<form action="/turimosTierraMedia/Promociones/edit.do" method="post">
 			<input type="hidden" name="id" value="${attraction.id}">
-			<jsp:include page="/views/Promociones/form.jsp"></jsp:include>
+			<jsp:include page="/views/promociones/form.jsp"></jsp:include>
 		</form>
 	</main>
 </body>

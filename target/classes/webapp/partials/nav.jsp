@@ -11,7 +11,7 @@
 		<div class="collapse navbar-collapse" id="navbarCollapse">
 			<ul class="navbar-nav me-auto mb-2 mb-md-0">
 			<li class="nav-item"><a class="nav-link active"
-					aria-current="page" href="/turimosTierraMedia/Promociones/index.do">Promociones</a></li>
+					aria-current="page" href="/turimosTierraMedia/promociones/index.do">Promociones</a></li>
 				<li class="nav-item"><a class="nav-link active"
 					aria-current="page" href="/turimosTierraMedia/attractions/index.do">Atracciones</a></li>
 					<c:if test="${user.isAdmin()}">				

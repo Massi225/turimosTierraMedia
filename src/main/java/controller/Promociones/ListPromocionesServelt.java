@@ -15,10 +15,10 @@ import model.User;
 import services.PromocionService;
 import services.UserService;
 
-@WebServlet("/promocion/index.do")
+@WebServlet("/promociones/index.do")
 public class ListPromocionesServelt extends HttpServlet implements Servlet {
 	
-	private static final long serialVersionUID = -8346640902238722429L;
+	private static final long serialVersionUID = 6713480411872133414L;
 	private PromocionService promocionService;
 
 	@Override
@@ -34,7 +34,7 @@ public class ListPromocionesServelt extends HttpServlet implements Servlet {
 		req.setAttribute("promociones", promociones);
 
 		RequestDispatcher dispatcher = getServletContext()
-				.getRequestDispatcher("/views/promocion/index.jsp");
+				.getRequestDispatcher("/views/promociones/index.jsp");
 		dispatcher.forward(req, resp);
 
 	}
