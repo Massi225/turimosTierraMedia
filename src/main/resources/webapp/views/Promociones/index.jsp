@@ -44,7 +44,7 @@
 					<th>Promocion</th>
 					<th>Costo</th>
 					<th>Duracion</th>
-					<th>Cupo</th>
+					<th>tipoAtraccion</th>
 					<th>Acciones</th>
 		</tr>
 </thead>
@@ -54,6 +54,28 @@
    <tr>
 	<td><strong><c:out value="${promocion.nombre}"></c:out></strong><p>descripcion de la promocion</p></td>
 								<td><c:out value="${promocion.costo}"></c:out></td>
+								<td><c:out value="${promocion.tiempo}"></c:out></td>
+								<td><c:out value="${promocion.tipoAtraccion}"></c:out></td>
+								<td><c:if test="${user.admin}">
+								<a href="/turimosTierraMedia/promociones/edit.do?id=${promocion.idPromocion}"
+									class="btn btn-light rounded-0" role="button"><i
+									class="bi bi-pencil-fill"></i></a>
+								<a href="/turimosTierraMedia/promociones/delete.do?id=${promocion.idPromocion}"
+									class="btn btn-danger rounded" role="button"><i
+									class="bi bi-x-circle-fill"></i></a>
+							</c:if> 
+							<c:choose>
+								<c:when
+									test="${user.canAffordPromo( promocion) && user.canAttendPromo( promocion) }">
+									<a href="/turimosTierraMedia/promociones/buy.do?id=${promocion.idPromocion}"
+										class="btn btn-success rounded" role="button">Comprar</a>
+								</c:when>
+								<c:otherwise>
+									<a href="#" class="btn btn-secondary rounded disabled"
+										role="button">No se puede comprar</a>
+								</c:otherwise>
+							</c:choose></td>
+							</tr>
   </c:forEach>
 		</tbody>
 		</table>

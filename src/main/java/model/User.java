@@ -125,11 +125,11 @@ public class User {
 		return "User [id=" + id + ", username=" + username + ", password=" + password + ", admin=" + admin + "]";
 	}
 	public boolean canAffordPromo(Promocion Promocion) {
-		return Promocion.getPrecio() <= this.coins;
+		return Promocion.getCosto() <= this.coins;
 	}
 
 	public boolean canAttendPromo(Promocion Promocion) {
-		return Promocion.getTiempoPromocion() <= this.time;
+		return Promocion.getTiempo() <= this.time;
 	}
 
 }
