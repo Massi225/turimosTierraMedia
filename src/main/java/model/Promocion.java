@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public abstract class Promocion  {
+public abstract  class Promocion  {
 	protected int idPromocion;
 	protected String nombre;
 	protected List<Atraccion> atracciones;
@@ -17,70 +17,37 @@ public abstract class Promocion  {
 	private Map<String, String> errors;
 	
 		
-	public TipoAtraccion getTipoAtraccion() {
-		return tipoAtraccion;
-	}
-
-	public Double getCosto() {
-		return costo;
-	}
-
-	public Double getTiempo() {
-		return tiempo;
-	}
-
+	
 	
 	public Promocion( String nombre, List<Atraccion> atracciones, TipoAtraccion tipoAtraccion) {
 		super();
 		this.nombre = nombre;
-		this.setCosto(atracciones);
+		//this.setCosto(atracciones);
 		this.setTiempo(atracciones);
 		this.tipoAtraccion = tipoAtraccion;
-		this.setCupo(atracciones);
+		
+		
 	}
+	
+
 	public Promocion(int idPromocion, String nombre, List<Atraccion> atracciones, TipoAtraccion tipoAtraccion) {
 		this.idPromocion = idPromocion;
 		this.nombre = nombre;
-		this.setCosto(atracciones);
+		//this.setCosto(atracciones);
 		this.setTiempo(atracciones);
 		this.tipoAtraccion = tipoAtraccion;
-		this.setCupo(atracciones);
-	//	private Map<String, String> errors;
-	}
-/*
-	public Promocion(int idProducto, double costo, double tiempo, String nombreAtraccion,
-			TipoAtraccion tipoDeAtraccion) {
-		this.idPromocion = idProducto;
-		this.nombre = nombreAtraccion;
-		this.costo = costo;
-		this.tiempo = tiempo;
-		this.tipoAtraccion = tipoDeAtraccion;
-	}
-
-	public Promocion (int idProducto, double costo, double tiempo, String nombreAtraccion){
-this.idPromocion = idProducto;
-this.nombre = nombreAtraccion;
-this.costo = costo;
-this.tiempo = tiempo;
-	}
-	
-	
-	public Promocion(String nombre , double costo , double tiempo , List<Atraccion> atracciones, TipoAtraccion tipo) {
-		this.nombre = nombre;
-		this.getPrecio();
-		this.tiempo = tiempo;
-		this.tipoAtraccion = tipo;
-		this.atracciones = atracciones;
+		
 		
 	}
-	*/
+
+
 	
-public boolean isValid() {
+/*public boolean isValid() {
 		validate();
 		return errors.isEmpty();
 	}
-	
-	public void validate() {
+	*/
+	/*public void validate() {
 		errors = new HashMap<String, String>();
 
 		if ( costo<= 0) {
@@ -96,7 +63,7 @@ public boolean isValid() {
 			errors.put("capacity", "Debe ser positivo");
 		}
 	}
-	
+	*/
 	public Map<String, String> getErrors() {
 		return errors;
 	}
@@ -130,13 +97,8 @@ public boolean isValid() {
 		this.cupo = cupo;
 	}
 
-	public void setCosto(List<Atraccion> atrIncluidas) {
-		double costo = 0;
-		for (int i = 0; i < atrIncluidas.size(); i++) {
-			costo += atrIncluidas.get(i).getPrecio();
-		}
-		this.costo = costo;
-	}
+	
+	
 
 	public double getPrecio() {
 		double costoTotal = 0.0;
@@ -171,7 +133,7 @@ public boolean isValid() {
 
 	
 	
-	public int getCupo() {
+	public double setCupo() {
 		int cupo = 0;
 		for (Atraccion i : this.getAtracciones()) {
 			if (cupo == 0) {
@@ -184,10 +146,7 @@ public boolean isValid() {
 		return cupo;
 	}
 
-	public void setCupo() {
-		for (Atraccion i : this.atracciones)
-			i.setCupoPersonas();
-	}
+	
 
 	public boolean hayCupo() {
 		boolean resultado = true;
@@ -240,9 +199,18 @@ public boolean isValid() {
 	public int getIdPromocion() {
 		return idPromocion;
 	}
+	public TipoAtraccion getTipoAtraccion() {
+		return tipoAtraccion;
+	}
 
+	public Double getCosto() {
+		return costo;
+	}
 
-	protected abstract String tipoPromocion();
+	public Double getTiempo() {
+		return tiempo;
+	}
 
-	protected abstract String visitaGratis();
+	
+	
 	}

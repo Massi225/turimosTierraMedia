@@ -24,7 +24,7 @@ public class PromocionService {
 
 		public Promocion create(String atraccion1,String atraccion2,String dependeDeLapromo, String nombre,
 				TipoAtraccion tipoAtraccion , String tipoPromocion) {
-			Promocion promocion=null;
+			Promocion TipoAtraccion=null;
 			AtraccionesDao atr = DAOFactory.getAtraccionesDAO();
 	       List<Atraccion> lista = new ArrayList <Atraccion>();
 	          lista.add( atr.findByName2(atraccion1));
@@ -57,7 +57,7 @@ public class PromocionService {
 
 			return promocion;
 		}
-
+/*
 		public Promocion update(Integer idPromocion, String atraccion1,String atraccion2,String dependeDeLapromo, String nombre,
 				TipoAtraccion tipoAtraccion , String tipoPromocion) {
 
@@ -69,25 +69,28 @@ public class PromocionService {
 			Promocion.setDuration(duration);
 			Promocion.setCapacity(capacity);
 
-			if (attraction.isValid()) {
-				attractionDAO.update(attraction);
+			if (Promocion.isValid()) {
+				promocionDAO.update(promocion);
 				// XXX: si no devuelve "1", es que hubo más errores
 			}
 
 			return attraction;
+		}*/
+
+public void delete(Integer id , String tipoPromocion) {
+	
+	
+	
+			Promocion promocion = new Promocion(id, null, null, null, null, null,null , null);
+
+			PromocionDAO promocionDAO = DAOFactory.getPromocionDAO();
+			promocionDAO.delete(promocion);
 		}
 
-/*public void delete(Integer id) {
-			Promocion Promocion = new Promocion(id, null, null, null, null);
-
-			AttractionDAO attractionDAO = DAOFactory.getAttractionDAO();
-			attractionDAO.delete(attraction);
+		public Promocion find(Integer id) {
+			return DAOFactory.getPromocionDAO().find(id);
 		}
 
-		public Attraction find(Integer id) {
-			return DAOFactory.getAttractionDAO().find(id);
-		}
-*/
 		
 	}
 

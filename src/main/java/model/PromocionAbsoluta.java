@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PromocionAbsoluta extends Promocion {
-	private double costo;
+	
 	private String tipoPromocion;
 	private List<Atraccion> atracciones;
+	
+	
 
 	public PromocionAbsoluta(int idPromo, List<Atraccion> atracciones, Double valorPaquete, String nombre,
 			TipoAtraccion tipoAtraccion) {
@@ -14,6 +16,7 @@ public class PromocionAbsoluta extends Promocion {
 		this.setPrecio(valorPaquete);
 		this.atracciones = atracciones;
 		this.tipoPromocion = "Absoluta";
+		
 	}
 	public PromocionAbsoluta( List<Atraccion> atracciones, Double valorPaquete, String nombre,
 			TipoAtraccion tipoAtraccion) {
@@ -21,6 +24,8 @@ public class PromocionAbsoluta extends Promocion {
 		this.setPrecio(valorPaquete);
 		this.atracciones = atracciones;
 		this.tipoPromocion = "Absoluta";
+           this.setCupo(atracciones);
+		
 	}
 	@Override
 	public double getPrecio() {
@@ -41,7 +46,6 @@ public class PromocionAbsoluta extends Promocion {
 				+ "cupo:" + " " + this.getCupo() + atracciones;
 	}*/
 
-	@Override
 	public String tipoPromocion() {
 		return "Absoluta";
 	}
@@ -57,8 +61,24 @@ public class PromocionAbsoluta extends Promocion {
 		return super.getTiempoPromocion();
 	}
 
-	@Override
-	protected String visitaGratis() {
-		return null;
+	
+	
+	public void SetCosto(Double valorPaquete) {
+		this.costo=valorPaquete;
+		
 	}
+	public void setCupo(List<Atraccion> atracciones){
+	double cupo = 0;
+	for (int i = 0; i < atracciones.size(); i++) {
+		if (cupo == 0) {
+			cupo = atracciones.get(i).getCupoPersonas();
+		}
+		if (cupo >  atracciones.get(i).getCupoPersonas()) {
+			cupo =  atracciones.get(i).getCupoPersonas();
+}
+		
+	}
+	this.cupo=cupo;
+	}
+	
 }

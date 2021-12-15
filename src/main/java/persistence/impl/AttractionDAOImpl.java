@@ -61,7 +61,7 @@ public class AttractionDAOImpl implements AttractionDAO {
 	@Override
 	public int insert(Attraction attraction) {
 		try {
-			String sql = "INSERT INTO ATTRACTIONS (NAME, COST, DURATION, CAPACITY) VALUES (?, ?, ?, ?)";
+			String sql = "INSERT INTO ATTRACTIONS (NAME, COST, DURATION, CAPACITY, DESCRIPTION , IMAGE) VALUES (?, ?, ?, ?, ? ,?)";
 			Connection conn = ConnectionProvider.getConnection();
 
 			PreparedStatement statement = conn.prepareStatement(sql);
@@ -70,6 +70,9 @@ public class AttractionDAOImpl implements AttractionDAO {
 			statement.setDouble(i++, attraction.getCost());
 			statement.setDouble(i++, attraction.getDuration());
 			statement.setInt(i++, attraction.getCapacity());
+			statement.setString(i++, attraction.getDescription());
+			statement.setString(i++, attraction.getImage());
+			
 			int rows = statement.executeUpdate();
 
 			return rows;
@@ -81,7 +84,7 @@ public class AttractionDAOImpl implements AttractionDAO {
 	@Override
 	public int update(Attraction attraction) {
 		try {
-			String sql = "UPDATE ATTRACTIONS SET NAME = ?, COST = ?, DURATION = ?, CAPACITY = ? WHERE ID = ?";
+			String sql = "UPDATE ATTRACTIONS SET NAME = ?, COST = ?, DURATION = ?, CAPACITY = ? , DESCRIPTION = ? , IMAGE = ? WHERE ID = ?";
 			Connection conn = ConnectionProvider.getConnection();
 
 			PreparedStatement statement = conn.prepareStatement(sql);
@@ -91,6 +94,8 @@ public class AttractionDAOImpl implements AttractionDAO {
 			statement.setDouble(i++, attraction.getDuration());
 			statement.setInt(i++, attraction.getCapacity());
 			statement.setInt(i++, attraction.getId());
+			statement.setString(i++, attraction.getDescription());
+			statement.setString(i++, attraction.getImage());
 			int rows = statement.executeUpdate();
 
 			return rows;

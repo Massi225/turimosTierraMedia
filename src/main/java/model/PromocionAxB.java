@@ -7,6 +7,8 @@ public class PromocionAxB extends Promocion {
 	private Atraccion atrGratis;
 	private List<Atraccion> atracciones;
 	private String tipoPromocion;
+	
+	
 
 	public PromocionAxB(int idPromo, List<Atraccion> atracciones, Atraccion atrGratis, String nombre,
 			TipoAtraccion tipoAtraccion) {
@@ -15,6 +17,7 @@ public class PromocionAxB extends Promocion {
 		this.atracciones = atracciones;
 		this.atracciones.add(atrGratis);
 		this.tipoPromocion = "AxB";
+		  this.setCupo(atracciones,atrGratis);
 	}
 	public PromocionAxB(List<Atraccion> atracciones, Atraccion atrGratis, String nombre,
 			TipoAtraccion tipoAtraccion) {
@@ -23,6 +26,8 @@ public class PromocionAxB extends Promocion {
 		this.atracciones = atracciones;
 		this.atracciones.add(atrGratis);
 		this.tipoPromocion = "AxB";
+		this.setCosto(atracciones);
+		 this.setCupo(atracciones ,atrGratis);
 	}
 	 public boolean isAbsoluta(){
 			return tipoPromocion.equals("absoluta");
@@ -36,7 +41,7 @@ public class PromocionAxB extends Promocion {
 		return valor;
 	}
 
-	@Override
+	
 	public String visitaGratis() {
 		return atracciones.get(atracciones.size() - 1).getNombre();
 	}
@@ -48,7 +53,6 @@ public class PromocionAxB extends Promocion {
 	}*/
 	
 
-	@Override
 	public String tipoPromocion() {
 		return "AxB";
 	}
@@ -66,6 +70,30 @@ public class PromocionAxB extends Promocion {
 			tiempo += atraccionesEnPromo.getDuracion();
 		}
 		return tiempo;
-
 	}
+	
+	public void setCosto (List<Atraccion> atracciones) {
+		
+			double valor = 0;
+			for (int x = 0; x < atracciones.size(); x++) {
+				valor += atracciones.get(x).getPrecio();
+			}
+			this.costo=valor;
+}
+	public void setCupo(List<Atraccion> atracciones, Atraccion art){
+		double cupo = 0;
+		for (int i = 0; i < atracciones.size(); i++) {
+			if (cupo == 0) {
+				cupo = atracciones.get(i).getCupoPersonas();
+			}
+			if (cupo >  atracciones.get(i).getCupoPersonas()) {
+				cupo =  atracciones.get(i).getCupoPersonas();
+	}
+			if(cupo > art.getCupoPersonas())
+			{
+				cupo = art.getCupoPersonas();
+						}			
+		}
+		this.cupo=cupo;
+		}
 }
