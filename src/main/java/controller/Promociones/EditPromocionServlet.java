@@ -42,24 +42,24 @@ public class EditPromocionServlet extends HttpServlet{
 		protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 			Integer id = Integer.parseInt(req.getParameter("id"));
 			String nombre = req.getParameter("nambre");
-			Double cost = Double.parseDouble(req.getParameter("c"));
+			Double cost = Double.parseDouble(req.getParameter("costo"));
 			
-			Double duration = Double.parseDouble(req.getParameter("duration"));
-			Integer capacity = Integer.parseInt(req.getParameter("capacity"));
+			Double duration = Double.parseDouble(req.getParameter("tiempo"));
 			
 			
-			Promocion promocion = promocionService.update(id, name, cost, duration, capacity, description , image);
+			
+			Promocion promocion = promocionService.update(id, nombre ,costo , tiempo);
 
-			if (attraction.isValid()) {
-				resp.sendRedirect("/turimosTierraMedia/attractions/index.do");
+			if (promocion.isValid()) {
+				resp.sendRedirect("/turimosTierraMedia/promociones/index.do");
 			} else {
 				req.setAttribute("promocion", promocion);
 
 				RequestDispatcher dispatcher = getServletContext()
-						.getRequestDispatcher("/views/attractions/edit.jsp");
+						.getRequestDispatcher("/views/promociones/edit.jsp");
 				dispatcher.forward(req, resp);
 			}
 		}
 	}
 
-}
+

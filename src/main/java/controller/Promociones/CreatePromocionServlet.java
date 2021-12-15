@@ -36,11 +36,11 @@ public class CreatePromocionServlet {
 		@Override
 		protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 			String name = req.getParameter("nombre");
-			Double cost = Double.parseDouble(req.getParameter("cost"));
-			Double duration = Double.parseDouble(req.getParameter("duration"));
-			Integer capacity = Integer.parseInt(req.getParameter("capacity"));
+			Double cost = Double.parseDouble(req.getParameter("costo"));
+			Double duration = Double.parseDouble(req.getParameter("tiempo"));
+			
 
-			Promocion promocion = PromocionService.create(name, cost, duration, capacity);
+			Promocion promocion = PromocionService.create(nambre, costo, duracion, );
 			
 			if (promocion.isValid()) {
 				resp.sendRedirect("/turimosTierraMedia/promocion/index.do");
