@@ -74,13 +74,13 @@ this.tiempo = tiempo;
 		
 	}
 	*/
-	/*
+	
 public boolean isValid() {
 		validate();
 		return errors.isEmpty();
 	}
 	
-	/*public void validate() {
+	public void validate() {
 		errors = new HashMap<String, String>();
 
 		if ( costo<= 0) {
@@ -99,8 +99,7 @@ public boolean isValid() {
 	
 	public Map<String, String> getErrors() {
 		return errors;
-	}*/
-	
+	}
 	public void setTiempo(List<Atraccion> atrIncluidas) {
 		double tiempo = 0;
 		for (int i = 0; i < atrIncluidas.size(); i++) {

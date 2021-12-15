@@ -43,8 +43,9 @@ public class EditAttractionServlet extends HttpServlet {
 		// Integer cost = req.getParameter("cost").trim() == "" ? null : Integer.parseInt(req.getParameter("cost"));
 		Double duration = Double.parseDouble(req.getParameter("duration"));
 		Integer capacity = Integer.parseInt(req.getParameter("capacity"));
-
-		Attraction attraction = attractionService.update(id, name, cost, duration, capacity);
+		String description= req.getParameter("description");
+		String image = req.getParameter("image");
+		Attraction attraction = attractionService.update(id, name, cost, duration, capacity, description , image);
 
 		if (attraction.isValid()) {
 			resp.sendRedirect("/turimosTierraMedia/attractions/index.do");

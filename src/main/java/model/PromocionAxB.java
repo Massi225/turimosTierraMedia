@@ -24,7 +24,9 @@ public class PromocionAxB extends Promocion {
 		this.atracciones.add(atrGratis);
 		this.tipoPromocion = "AxB";
 	}
-
+	 public boolean isAbsoluta(){
+			return tipoPromocion.equals("absoluta");
+	 }
 	@Override
 	public double getPrecio() {
 		double valor = 0;

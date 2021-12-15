@@ -31,8 +31,9 @@ public class PromoPorcentual extends Promocion {
 		this.tipoPromocion = "Porcentual";
 	}
 
-
-
+	 public boolean isAbsoluta(){
+			return tipoPromocion.equals("absoluta");
+	 }
 
 	public double getPorcentaje() {
 		return porcentaje;

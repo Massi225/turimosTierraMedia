@@ -16,7 +16,7 @@
 </div>
 <div class="mb-3">
 	<label for="duration"
-		class='col-form-label ${attraction.errors.get("duration") != null ? "is-invalid" : "" }'>Duration2222222:</label>
+		class='col-form-label ${attraction.errors.get("duration") != null ? "is-invalid" : "" }'>Duracion:</label>
 	<input class="form-control" type="number" id="duration" name="duration"
 		required value="${attraction.duration}"></input>
 	<div class="invalid-feedback">
@@ -25,14 +25,23 @@
 </div>
 <div class="mb-3">
 	<label for="capacity"
-		class='col-form-label ${attraction.errors.get("capacity") != null ? "is-invalid" : "" }'>Capacity:</label>
+		class='col-form-label ${attraction.errors.get("capacity") != null ? "is-invalid" : "" }'>Cupo:</label>
 	<input class="form-control" type="number" id="capacity" name="capacity"
 		required value="${attraction.capacity}"></input>
 	<div class="invalid-feedback">
 		<c:out value='${attraction.errors.get("capacity")}'></c:out>
 	</div>
 </div>
-
+<div class="mb-3">
+	<label for="description" class="col-form-label">Description:</label> <input
+		type="text" class="form-control" id="description" name="description"
+		required value="${attraction.description}">
+</div>
+<div class="mb-3">
+	<label for="image" class="col-form-label">Url Imagen</label> <input
+		type="text" class="form-control" id="image" name="image"
+		required value="${attraction.image}">
+</div>
 <div>
 	<button type="submit" class="btn btn-primary">Guardar</button>
 	<a onclick="window.history.back();" class="btn btn-secondary"

@@ -8,6 +8,7 @@
 </head>
 <body>
 
+
 <jsp:include page="/partials/nav.jsp"></jsp:include>
 					
 	<main class="container">
@@ -53,8 +54,15 @@
    
    <tr>
 	<td><strong><c:out value="${promocion.nombre}"></c:out></strong><p>descripcion de la promocion</p></td>
-	<td><c:out value="${promocion.costo}"></c:out></td>
- <td><c:out value="${promocion.tiempo}"></c:out></td>
+ <td><c:choose>
+								<c:when test= "${PromocionAbsoluta.isAbsoluta}">
+								<c:out value="${PromocionAbosluta.valorPaquete}"></c:out>
+								</c:when>
+								<c:otherwise>
+									<c:out value="${promocion.costo}"></c:out>
+								</c:otherwise>
+							</c:choose></td>
+ <td><c:out value="${promocion.tiempo}"></c:out> </td>
 <td><c:out value="${promocion.tipoAtraccion}"></c:out></td>
 
 

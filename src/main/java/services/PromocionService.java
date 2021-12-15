@@ -51,20 +51,21 @@ public class PromocionService {
              
 			if (promocion.isValid()) {
 				PromocionDAO promocionDAO = DAOFactory.getPromocionDAO();
-				promocionDAO.insert(attraction);
+				promocionDAO.insert(promocion);
 				// XXX: si no devuelve "1", es que hubo más errores
 			}
 
 			return promocion;
 		}
 
-	/*	public Promocion update(Integer idPromocion, String nombre, ArrayList<Atraccion> atracciones, TipoAtraccion tipoAtraccion) {
+		public Promocion update(Integer idPromocion, String atraccion1,String atraccion2,String dependeDeLapromo, String nombre,
+				TipoAtraccion tipoAtraccion , String tipoPromocion) {
 
 			PromocionDAO promocionDAO = DAOFactory.getPromocionDAO();
 			Promocion promocion = promocionDAO.find(idPromocion);
-
-			Promocion.setName(name);
-			Promocion.setCost(cost);
+            if ()
+			Promocion.setNombre(nombre);
+			Promocion;
 			Promocion.setDuration(duration);
 			Promocion.setCapacity(capacity);
 
@@ -75,7 +76,7 @@ public class PromocionService {
 
 			return attraction;
 		}
-*/
+
 /*public void delete(Integer id) {
 			Promocion Promocion = new Promocion(id, null, null, null, null);
 
@@ -87,5 +88,6 @@ public class PromocionService {
 			return DAOFactory.getAttractionDAO().find(id);
 		}
 */
+		
 	}
 

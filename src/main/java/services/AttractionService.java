@@ -12,9 +12,10 @@ public class AttractionService {
 		return DAOFactory.getAttractionDAO().findAll();
 	}
 
-	public Attraction create(String name, Double cost, Double duration, Integer capacity) {
+	public Attraction create(String name, Double cost, Double duration, Integer capacity,String description,
+            String image) {
 
-		Attraction attraction = new Attraction(name, cost, duration, capacity);
+		Attraction attraction = new Attraction(name, cost, duration, capacity,description, image);
 
 		if (attraction.isValid()) {
 			AttractionDAO attractionDAO = DAOFactory.getAttractionDAO();
@@ -25,7 +26,7 @@ public class AttractionService {
 		return attraction;
 	}
 
-	public Attraction update(Integer id, String name, Double cost, Double duration, Integer capacity) {
+	public Attraction update(Integer id, String name, Double cost, Double duration, Integer capacity , String description, String image) {
 
 		AttractionDAO attractionDAO = DAOFactory.getAttractionDAO();
 		Attraction attraction = attractionDAO.find(id);
@@ -34,6 +35,8 @@ public class AttractionService {
 		attraction.setCost(cost);
 		attraction.setDuration(duration);
 		attraction.setCapacity(capacity);
+		attraction.setImage(image);
+		attraction.setDescription(description);
 
 		if (attraction.isValid()) {
 			attractionDAO.update(attraction);
@@ -44,7 +47,7 @@ public class AttractionService {
 	}
 
 	public void delete(Integer id) {
-		Attraction attraction = new Attraction(id, null, null, null, null);
+		Attraction attraction = new Attraction(id, null, null, null, null , null ,null );
 
 		AttractionDAO attractionDAO = DAOFactory.getAttractionDAO();
 		attractionDAO.delete(attraction);

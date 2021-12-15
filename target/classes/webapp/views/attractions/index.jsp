@@ -41,6 +41,8 @@
 		<table class="table table-stripped table-hover">
 			<thead>
 				<tr>
+				     
+				    <th>Imagen</th>
 					<th>Atracci&oacute;n</th>
 					<th>Costo</th>
 					<th>Duraci&oacute;n</th>
@@ -51,10 +53,10 @@
 			<tbody>
 				<c:forEach items="${attractions}" var="attraction">
 					<tr>
+					<td><img src="<c:out value="${atraccion.imagen}"></c:out>"
+                            class="rounded-circle" width="75" height="75" alt="imagen"></td>
 						<td><strong><c:out value="${attraction.name}"></c:out></strong>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-								Cras pretium eros urna. Sed quis erat congue, bibendum tortor
-								malesuada, iaculis diam. Ut ut imperdiet sapien.</p></td>
+						<br><c:out value="${attraction.description}"></c:out></td>
 						<td><c:out value="${attraction.cost}"></c:out></td>
 						<td><c:out value="${attraction.duration}"></c:out></td>
 						<td><c:out value="${attraction.capacity}"></c:out></td>

@@ -55,7 +55,7 @@ public class AttractionDAOImpl implements AttractionDAO {
 	
 	private Attraction toAttraction(ResultSet attractionRegister) throws SQLException {
 		return new Attraction(attractionRegister.getInt(1), attractionRegister.getString(2),
-				attractionRegister.getDouble(3), attractionRegister.getDouble(4), attractionRegister.getInt(5));
+				attractionRegister.getDouble(3), attractionRegister.getDouble(4), attractionRegister.getInt(5),attractionRegister.getString(6), attractionRegister.getString(7));
 	}
 
 	@Override

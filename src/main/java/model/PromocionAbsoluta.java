@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PromocionAbsoluta extends Promocion {
-	private double valorPaquete;
+	private double costo;
 	private String tipoPromocion;
 	private List<Atraccion> atracciones;
 
@@ -24,15 +24,15 @@ public class PromocionAbsoluta extends Promocion {
 	}
 	@Override
 	public double getPrecio() {
-		return this.valorPaquete;
+		return this.costo;
 	}
-
+    
 	public int getIdPromocion() {
 		return super.getIdPromocion();
 	}
 
 	private void setPrecio(Double precio) {
-		this.valorPaquete = precio;
+		this.costo = precio;
 	}
 
 	//@Override

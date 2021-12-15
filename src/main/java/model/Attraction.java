@@ -10,8 +10,23 @@ public class Attraction {
 	private Double cost;
 	private Double duration;
 	private Integer capacity;
+	private String description;
+	private String image;
 	
 	private Map<String, String> errors;
+	
+
+    public Attraction(String name, Double cost, Double duration, Integer capacity, String description,
+            String image) {
+        super();
+        this.id = id;
+        this.name = name;
+        this.cost = cost;
+        this.duration = duration;
+        this.capacity = capacity;
+        this.description = description;
+        this.image = image;
+    }
 	
 	public Attraction(String name, Double cost, Double duration, Integer capacity) {
 		super();
@@ -19,13 +34,33 @@ public class Attraction {
 		this.cost = cost;
 		this.duration = duration;
 		this.capacity = capacity;
+		
 	}
 	
-	public Attraction(Integer id, String name, Double cost, Double duration, Integer capacity) {
+	public Attraction(Integer id, String name, Double cost, Double duration, Integer capacity, String description,
+            String image) {
 		this(name, cost, duration, capacity);
 		this.id = id;
+		this.description = description;
+        this.image = image;
 	}
 	
+	public void setImage(String image) {
+		this.image = image;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getImage() {
+		return image;
+	}
+
 	public boolean isValid() {
 		validate();
 		return errors.isEmpty();
