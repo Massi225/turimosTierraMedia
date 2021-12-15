@@ -30,10 +30,10 @@ public class PromocionService {
 	          lista.add( atr.findByName2(atraccion1));
 	          lista.add( atr.findByName2(atraccion2));
 	          
-	       
+	       Promocion promocion= null;
 	          if (tipoPromocion.equalsIgnoreCase("porcentual")) {
                    
-		          promocion = new PromoPorcentual( lista, Integer.valueOf(dependeDeLapromo),
+		          promocion = new PromoPorcentual( lista, dependeDeLapromo,
 							nombre, tipoAtraccion);
 							
 				} else if (tipoPromocion.equalsIgnoreCase("AxB")) {

@@ -41,8 +41,8 @@ public class EditPromocionServlet extends HttpServlet{
 		@Override
 		protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 			Integer id = Integer.parseInt(req.getParameter("id"));
-			String nombre = req.getParameter("name");
-			Double cost = Double.parseDouble(req.getParameter("cost"));
+			String nombre = req.getParameter("nambre");
+			Double cost = Double.parseDouble(req.getParameter("c"));
 			
 			Double duration = Double.parseDouble(req.getParameter("duration"));
 			Integer capacity = Integer.parseInt(req.getParameter("capacity"));
@@ -53,7 +53,7 @@ public class EditPromocionServlet extends HttpServlet{
 			if (attraction.isValid()) {
 				resp.sendRedirect("/turimosTierraMedia/attractions/index.do");
 			} else {
-				req.setAttribute("attraction", attraction);
+				req.setAttribute("promocion", promocion);
 
 				RequestDispatcher dispatcher = getServletContext()
 						.getRequestDispatcher("/views/attractions/edit.jsp");

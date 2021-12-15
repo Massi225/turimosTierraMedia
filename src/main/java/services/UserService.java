@@ -5,6 +5,7 @@ import java.util.List;
 import model.Attraction;
 import model.User;
 import persistence.AttractionDAO;
+import persistence.UserDAO;
 import persistence.commons.DAOFactory;
 
 public class UserService {
@@ -24,4 +25,17 @@ public class UserService {
 
 		return user;
 	}
+	
+	public void delete(Integer id) {
+		User user = new User(id, null, null, null, null , null);
+
+		UserDAO userDAO = DAOFactory.getUserDAO();
+		userDAO.delete(user);
+	}
+
+	public User find(Integer id) {
+		return DAOFactory.getUserDAO().find(id);
+	}
+
 }
+

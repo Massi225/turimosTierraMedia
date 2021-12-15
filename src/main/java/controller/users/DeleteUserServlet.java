@@ -1,4 +1,5 @@
-package controller.Promociones;
+package controller.users;
+
 import java.io.IOException;
 
 import jakarta.servlet.ServletException;
@@ -6,31 +7,31 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import services.PromocionService;
-
-
-@WebServlet("/promociones/delete.do")
-public class DeletePromocionServlet extends HttpServlet {
+import services.AttractionService;
+import services.UserService;
+@WebServlet("/users/delete.do")
+public class DeleteUserServlet extends HttpServlet {
 	
-	private static final long serialVersionUID = 5075717420040368672L;
-		private PromocionService promocionService;
+	
+
+	private static final long serialVersionUID = -5672024431368913082L;
+		private UserService userService;
 
 		@Override
 		public void init() throws ServletException {
 			super.init();
-			this.promocionService = new PromocionService();
+			this.userService = new UserService();
 		}
 		
 		@Override
 		protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 			Integer id = Integer.parseInt(req.getParameter("id"));
 
-			promocionService.delete(id);
+			userService.delete(id);
 
-			resp.sendRedirect("/turimosTierraMedia/promociones/index.do");
+			resp.sendRedirect("/turimosTierraMedia/users/index.do");
 		}
 
 
 	}
-
 
