@@ -11,14 +11,14 @@
 
 	<main class="container">
 
-		<c:if test="${attraction != null && !attraction.isValid()}">
+		<c:if test="${atraccion != null && !atraccion.isValid()}">
 			<div class="alert alert-danger">
 				<p>Se encontraron errores al actualizar la Promocion.</p>
 			</div>
 		</c:if>
 
-		<form action="/turimosTierraMedia/Promociones/edit.do" method="post">
-			<input type="hidden" name="id" value="${attraction.id}">
+		<form action="/turimosTierraMedia/promociones/edit.do" method="post">
+			<input type="hidden" name="id" value="${atraccion.id}">
 			<jsp:include page="/views/promociones/form.jsp"></jsp:include>
 		</form>
 	</main>

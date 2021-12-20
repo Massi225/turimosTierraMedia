@@ -1,20 +1,23 @@
 package services;
 
-import model.User;
-import model.nullobjects.NullUser;
-import persistence.UserDAO;
+
+import model.Usuario;
+import model.nullobjects.NullUsuario;
+
+import persistence.UsuarioDAO;
 import persistence.commons.DAOFactory;
 
 public class LoginService {
 
-	public User login(String username, String password) {
-		UserDAO userDao = DAOFactory.getUserDAO();
-    	User user = userDao.findByUsername(username);
+	public Usuario login(String nombre, String contrasenia) {
+		UsuarioDAO usuarioDAO = DAOFactory.getUsuarioDAO();
+    Usuario usuario = usuarioDAO.findByNombre(nombre);
     	
-    	if (user.isNull() || !user.checkPassword(password)) {
-    		user = NullUser.build();
+    	if (usuario.isNull() || !usuario.checkPassword(contrasenia)) {
+    		usuario = NullUsuario.build();
     	}
-    	return user;
+    	return usuario;
 	}
 	
 }
+// me retorna un usuario o un usuario nulo!  si la ocntraseña es diferente o null tmb da usuario nulo!

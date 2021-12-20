@@ -94,7 +94,7 @@ prefix="c"%>
             type="text"
             class="form-control"
             placeholder="Usuario"
-            name="username"
+            name="nombre"
             required
           />
 
@@ -103,7 +103,7 @@ prefix="c"%>
             type="password"
             class="form-control"
             placeholder="Contraseña"
-            name="password"
+            name="contrasenia"
             required
           />
 

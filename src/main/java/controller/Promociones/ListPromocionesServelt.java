@@ -11,9 +11,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.Promocion;
-import model.User;
 import services.PromocionService;
-import services.UserService;
+
 
 @WebServlet("/promociones/index.do")
 public class ListPromocionesServelt extends HttpServlet implements Servlet {

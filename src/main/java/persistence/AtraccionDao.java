@@ -1,8 +1,9 @@
 package persistence;
 
-import model.Attraction;
+import model.Atraccion;
 import persistence.commons.GenericDAO;
 
-public interface AtraccionDao extends GenericDAO<Attraction> {
+public interface AtraccionDAO extends GenericDAO<Atraccion> {
+	public Atraccion find1(String Nombre);
 
 }

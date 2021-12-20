@@ -1,216 +1,195 @@
 package model;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public abstract  class Promocion  {
-	protected int idPromocion;
-	protected String nombre;
-	protected List<Atraccion> atracciones;
-	protected TipoAtraccion tipoAtraccion;
-	protected Double costo;
-	protected Double tiempo;
-	protected Double cupo;
-
+public class Promocion {
+	private int id;
+	private String nombre;
+	private double costo;
+    private int duracion;
+	private  int cupos;
+	private String tipo_promocion;
+	private  List<Atraccion> atracciones;
+	private TipoAtraccion tipo_atraccion;
+	private double bonificacion;
 	private Map<String, String> errors;
 	
-		
 	
-	
-	public Promocion( String nombre, List<Atraccion> atracciones, TipoAtraccion tipoAtraccion) {
+	public Promocion(int id, String nombre, String tipo_promocion, double bonificacion,List<Atraccion> atracciones) {
 		super();
+		this.id = id;
 		this.nombre = nombre;
-		//this.setCosto(atracciones);
-		this.setTiempo(atracciones);
-		this.tipoAtraccion = tipoAtraccion;
-		
-		
-	}
-	
-
-	public Promocion(int idPromocion, String nombre, List<Atraccion> atracciones, TipoAtraccion tipoAtraccion) {
-		this.idPromocion = idPromocion;
-		this.nombre = nombre;
-		//this.setCosto(atracciones);
-		this.setTiempo(atracciones);
-		this.tipoAtraccion = tipoAtraccion;
-		
-		
-	}
-
-
-	
-/*public boolean isValid() {
-		validate();
-		return errors.isEmpty();
-	}
-	*/
-	/*public void validate() {
-		errors = new HashMap<String, String>();
-
-		if ( costo<= 0) {
-			errors.put("costo", "Debe ser positivo");
-		}
-		if (tiempo <= 0) {
-			errors.put("duration", "Debe ser positivo");
-		}
-		if (tiempo > 60) {
-			errors.put("tiempo", "Excede el tiempo máximo");
-		}
-		if (capacity <= 0) {
-			errors.put("capacity", "Debe ser positivo");
-		}
-	}
-	*/
-	public Map<String, String> getErrors() {
-		return errors;
-	}
-	public void setTiempo(List<Atraccion> atrIncluidas) {
-		double tiempo = 0;
-		for (int i = 0; i < atrIncluidas.size(); i++) {
-			tiempo += atrIncluidas.get(i).getDuracion();
-		}
-		this.tiempo = tiempo;
-	}
-
-	public Promocion(int idPromocion, String nombre, List<Atraccion> atracciones) {
-		super();
-		this.idPromocion = idPromocion;
-		this.nombre = nombre;
+		this.tipo_promocion= tipo_promocion;
+		this.bonificacion= bonificacion;
 		this.atracciones = atracciones;
-		this.setCupo(atracciones);
+		this.setCosto();
+		this.setDuracion();
+		this.setCupos();
+		this.setTipoAtracciones();
 	}
 
-	public void setCupo(List<Atraccion> atrIncluidas) {
-		double cupo = 0;
-		for (int i = 0; i < atrIncluidas.size(); i++) {
-			if (cupo == 0) {
-				cupo = atrIncluidas.get(i).getCupoPersonas();
-			}
-			if (cupo > atrIncluidas.get(i).getCupoPersonas()) {
-				cupo = atrIncluidas.get(i).getCupoPersonas();
-			}
+	public Promocion( String nombre, String tipo_promocion, double bonificacion,List<Atraccion> atracciones) {
+		super();
+		
+		this.nombre = nombre;
+		this.tipo_promocion= tipo_promocion;
+		this.bonificacion= bonificacion;
+		this.atracciones = atracciones;
+		this.setCosto();
+		this.setDuracion();
+		this.setCupos();
+		this.setTipoAtracciones();
+	}
+	public void setBonificacion(double bonificacion) {
+		this.bonificacion = bonificacion;
+	}
+
+
+	public boolean isValid() {
+	validate();
+	return errors.isEmpty();
+}
+
+public void validate() {
+	errors = new HashMap<String, String>();
+	if ( costo<= 0) {
+		errors.put("costo", "Debe ser positivo");
+	}
+	if (duracion <= 0) {
+		errors.put("duration", "Debe ser positivo");
+	}
+	if (duracion > 60) {
+		errors.put("tiempo", "Excede el tiempo máximo");
+	}
+	if (cupos <= 0) {
+		errors.put("capacity", "Debe ser positivo");
+	}
+}
+
+public Map<String, String> getErrors() {
+	return errors;
+}
+  public void setCosto () {
+	  String medida = this.tipo_promocion;
+		double costo2 = 0;
+		if(medida.equalsIgnoreCase("Porcentual")) {
+			   for (int i =0 ; i < atracciones.size(); i++) {
+					costo2 += atracciones.get(i).getCosto();
+					
+			   }
+			   costo2=Math.round(costo2*(1-bonificacion));
+			   
+				this.costo= costo2  ;
 			
-	}
-		this.cupo = cupo;
-	}
-
-	
-	
-
-	public double getPrecio() {
-		double costoTotal = 0.0;
-		for (Atraccion atraccion : this.atracciones) {
-			costoTotal += atraccion.getPrecio();
 		}
-		return costoTotal;
+	   if(medida.equalsIgnoreCase("AxB")) {
+		   for (int i =0 ; i < atracciones.size(); i++) {
+				costo2 += atracciones.get(i).getCosto();
+		   }
+			this.costo= costo2  ;
+			
+	   }if(medida.equalsIgnoreCase("Absoluta")){
+	   this.costo= bonificacion;
+	   }
+	    		
 	}
-
-	public boolean isNull() {
-		return false;
-	}
-	public String getNombre() {
-		return this.nombre;
-	}
-
+  
 	public List<Atraccion> getAtracciones() {
-		return this.atracciones;
+	return atracciones;
+}
+
+public void setAtracciones(List<Atraccion> atracciones) {
+	this.atracciones = atracciones;
+}
+
+public TipoAtraccion getTipoAtracciones() {
+	return tipo_atraccion;
+}
+
+public void setTipoAtracciones() {
+	
+	this.tipo_atraccion = this.atracciones.get(0).getTipo_atraccion();    // correguir q muestre el tipo de atracciones q tiene la promo
+}
+
+public void setDuracion() {
+	int tiempo =0;   
+	for (int i =0 ; i < atracciones.size(); i++) {
+		 tiempo += atracciones.get(i).getTiempo();
+	   }
+		this.duracion= tiempo;  ;
+}
+
+
+
+	public int getId() {
+		return id;
 	}
 
-	public String getLugares() {
-		String lugares = " ";
-		for (Atraccion i : this.atracciones) {
-			lugares = lugares + i.getNombre();
-		}
-		return lugares;
+
+	public void setId(int id) {
+		this.id = id;
 	}
+
+
+	public String getNombre() {
+		return nombre;
+	}
+
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
 
-	
-	
-	public double setCupo() {
-		int cupo = 0;
-		for (Atraccion i : this.getAtracciones()) {
-			if (cupo == 0) {
-				cupo = i.getCupoPersonas();
-			}
-			if (cupo > i.getCupoPersonas()) {
-				cupo = i.getCupoPersonas();
-			}
-		}
-		return cupo;
+
+	public double getCosto() {
+		return this.costo;
 	}
+      
 
 	
 
-	public boolean hayCupo() {
-		boolean resultado = true;
-		for (Atraccion i : this.getAtracciones()) {
-			if (i.getCupoPersonas() == 0) {
-				resultado = false;
-				break;
-			}
-		}
-		return resultado;
+
+	public double getDuracion() {
+		return duracion;
 	}
 
-	public double getTiempoPromocion() {
-		double tiempo = 0.0;
-		for (Atraccion atraccionesEnPromo : atracciones) {
-			tiempo += atraccionesEnPromo.getDuracion();
-		}
-		return tiempo;
+
+
+
+
+	public int getCupos() {
+		return cupos;
 	}
+
+
+	public void setCupos() {
+		int cupo = atracciones.get(0).getCupo();
+		for (int i =1 ; i < atracciones.size(); i++) {
+			if (cupo > atracciones.get(i).getCupo())
+				cupo=atracciones.get(i).getCupo();
+		}
+			this.cupos= cupo;
+	}
+
+	public String getTipo_promocion() {
+		return tipo_promocion;
+	}
+
+	public void setTipo_promocion(String tipo_promocion) {
+		this.tipo_promocion = tipo_promocion;
+	}
+
 
 	@Override
 	public String toString() {
-		return " nombre +  atracciones ";
+		return "Promocion [id=" + id + ", nombre=" + nombre + ", costo=" + costo + ", duracion=" + duracion + ", cupos="
+				+ cupos + ", tipo_promocion=" + tipo_promocion +" "+ "tipo_atraccion="
+				+ tipo_atraccion + ", bonificacion=" + bonificacion + "]";
 	}
 
-	public TipoAtraccion getPreferenciaPromo() {
-		TipoAtraccion preferencia = null;
-		for (Atraccion atraccionesEnPromo : atracciones) {
-			preferencia = atraccionesEnPromo.getTipo();
-		}
-		return preferencia;
-	}
-	public static TipoAtraccion getPreferenciaPromo2(int n) {
-		TipoAtraccion preferencia = null;
-		switch(n) {
-		  case 1:
-			  preferencia = TipoAtraccion.PAISAJE;
-			  break;
-		  case 2:
-			  preferencia = TipoAtraccion.AVENTURA;
-			  break;
-		  case 3:
-			  preferencia = TipoAtraccion.DEGUSTACION;
-			  break;
-			  default :
-				  break;
-		}
-		return preferencia;
-	}
-	public int getIdPromocion() {
-		return idPromocion;
-	}
-	public TipoAtraccion getTipoAtraccion() {
-		return tipoAtraccion;
-	}
 
-	public Double getCosto() {
-		return costo;
-	}
-
-	public Double getTiempo() {
-		return tiempo;
-	}
 
 	
-	
-	}
+}

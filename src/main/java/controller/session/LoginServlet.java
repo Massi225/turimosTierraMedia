@@ -9,7 +9,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import model.User;
+
+import model.Usuario;
 import services.LoginService;
 
 @WebServlet("/login")
@@ -25,13 +26,13 @@ public class LoginServlet extends HttpServlet {
 	
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-    	String username = req.getParameter("username");
-    	String password = req.getParameter("password");
+    	String nombre	 = req.getParameter("nombre");
+    	String contrasenia= req.getParameter("contrasenia");
     	
-    	User user = loginService.login(username, password);
+    	Usuario usuario = loginService.login(nombre, contrasenia);
     	
-    	if (!user.isNull()) {
-    		req.getSession().setAttribute("user", user);
+    	if (!usuario.isNull()) {
+    		req.getSession().setAttribute("usuario", usuario);
     		resp.sendRedirect("index.jsp");    		
        	} else {
     		req.setAttribute("flash", "Nombre de usuario o contraseña incorrectos");
@@ -42,3 +43,6 @@ public class LoginServlet extends HttpServlet {
     	}
     }
 }
+
+// a traves de los datos que paso  nombre y contraseña , usamos el metodo login para q me devuelva un usuari  , si este no es nulo ,requierola sesion y
+//establezo una variable temporal con el nombre usuario y direcciono al index.

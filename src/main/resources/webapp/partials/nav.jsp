@@ -35,17 +35,17 @@
             style="color: #fff"
             class="nav-link active"
             aria-current="page"
-            href="/turimosTierraMedia/attractions/index.do"
+            href="/turimosTierraMedia/atracciones/index.do"
             >Atracciones</a
           >
         </li>
-        <c:if test="${user.isAdmin()}">
+        <c:if test="${usuario.isAdmin()}">
           <li class="nav-item">
             <a
               style="color: #fff"
               class="nav-link active"
               aria-current="page"
-              href="/turimosTierraMedia/users/index.do"
+              href="/turimosTierraMedia/usuarios/index.do"
               >Usuarios</a
             >
           </li>
@@ -62,7 +62,7 @@
             data-bs-toggle="dropdown"
             aria-expanded="false"
           >
-            <c:out value="${user.username}"></c:out>
+            <c:out value="${usuario.nombre}"></c:out>
           </a>
           <ul
             class="dropdown-menu dropdown-menu-end"
@@ -71,7 +71,7 @@
             <li>
               <a class="dropdown-item disabled" style="color: black">
                 <i title="monedas" style="color: gold" class="bi bi-coin"></i>
-                <c:out value="${user.coins}"></c:out>
+                <c:out value="${usuario.monedas}"></c:out>
               </a>
             </li>
             <li>
@@ -81,7 +81,7 @@
                   style="color: blue"
                   class="bi bi-clock-fill"
                 ></i>
-                <c:out value="${user.time}h"></c:out>
+                <c:out value="${usuario.tiempo}h"></c:out>
               </a>
             </li>
             <li><hr class="dropdown-divider" /></li>

@@ -1,97 +1,195 @@
 package model;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import utils.Crypt;
 
-	
 public class Usuario {
-	private int idUsuario;
 	private String nombre;
-	public double presupuesto;
-	public double tiempoDisponible;
-	private TipoAtraccion tipoPreferido;
-	private List<Atraccion> todasLasAtracciones;
-	private List<Atraccion> atraccionesAdquiridas;
-	private List<Promocion> promocionesAdquiridas;
+	private int id;
+	private double monedas;
+	private int tiempo;
+	private TipoAtraccion preferencia;
+	private String contrasenia;
+	private boolean admin;
+	private HashMap<String, String> errors;
+	private String imagen;
 	
 	
-	public Usuario(int idUsuario, String nombre, double presupuesto, double tiempoDisponible,
-			TipoAtraccion tipoPreferido) {
-		this.idUsuario = idUsuario;
+	public Usuario (int id, String nombre, double monedas,int tiempo , TipoAtraccion preferencia, String contrasenia, boolean admin , String imagen) {
+		this.id=id;
+		this.nombre=nombre;
+		this.monedas=monedas;
+		this.tiempo=tiempo;
+		this.preferencia=preferencia;
+		this.contrasenia= contrasenia;
+		this.admin = admin;
+        this.imagen= imagen;
+		
+	}
+	public String getImagen() {
+		return imagen;
+	}
+	public void setImagen(String imagen) {
+		this.imagen = imagen;
+	}
+	public boolean getAdmin() {
+		return admin;
+	}
+	public void setAdmin(boolean admin) {
+		this.admin = admin;
+	}
+	public Usuario(String nombre, double monedas, int tiempo, TipoAtraccion preferencia, String contrasenia,String imagen) {
+		super();
 		this.nombre = nombre;
-		this.presupuesto = presupuesto;
-		this.tiempoDisponible = tiempoDisponible;
-		this.tipoPreferido = tipoPreferido;
-		this.todasLasAtracciones = new ArrayList<Atraccion>();
-		this.atraccionesAdquiridas = new ArrayList<Atraccion>();
-		this.promocionesAdquiridas = new ArrayList<Promocion>();
+		this.monedas = monedas;
+		this.tiempo = tiempo;
+		this.preferencia = preferencia;
+		this.contrasenia = contrasenia;
+		this.imagen= imagen;
 	}
-	public int getIdUsuario() {
-		return idUsuario;
+	
+	public boolean isValid() {
+		validate();
+		return errors.isEmpty();
 	}
-	public boolean esBuenPrecio(double precio) {
-		return presupuesto >= precio;
+	public void validate() {
+		errors = new HashMap<String, String>();
+		
+
+		if (monedas < 0) {
+			errors.put("monedas", "No debe ser negativo");
+		}
+		if (tiempo < 0) {
+			errors.put("tiempo", "No debe ser negativo");
+		}
+		if(contrasenia.length()> 4) {
+			errors.put(contrasenia,"No debe tener menos de 4 caracteres");
+		}
 	}
-	public boolean esTiempoSuficiente(double duracion) {
-		return tiempoDisponible >= duracion;
+
+
+	public Map<String, String> getErrors() {
+		return errors;
 	}
-	public boolean esAtraccionPreferida(List<TipoAtraccion> tipoAtraccion) {
-		return tipoAtraccion.contains(tipoPreferido);
+	
+
+	
+	public boolean checkPassword(String contrasenia) {
+		// this.password en realidad es el hash del password
+		return Crypt.match(contrasenia, this.contrasenia);
 	}
+
+
 	public String getNombre() {
 		return nombre;
 	}
-	public double getPresupuesto() {
-		return presupuesto;
-	}
-	public double getTiempoDisponible() {
-		return tiempoDisponible;
-	}
-	public TipoAtraccion getTipoPreferido() {
-		return tipoPreferido;
-	}
-	public List<Atraccion> getTodasLasAtracciones() {
-		return todasLasAtracciones;
-	}
-	public List<Promocion> getPromocionesAdquiridas() {
-		return promocionesAdquiridas;
-	}
-	public List<Atraccion> getAtraccionesAdquiridas() {
-		return atraccionesAdquiridas;
-	}
+
+
+
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	public void setPresupuesto(double presupuesto) {
-		this.presupuesto -= presupuesto;
+
+
+
+	public Integer getId() {
+		return id;
 	}
-	public void setTiempoDisponible(double tiempoDisponible) {
-		this.tiempoDisponible -= tiempoDisponible;
+	
+	public boolean isNull() {
+		return false;
 	}
-	public void setTipoPreferido(TipoAtraccion tipoPreferido) {
-		this.tipoPreferido = tipoPreferido;
+
+	
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
-	public void setTodasLasAtracciones(List<Atraccion> todasLasAtracciones) {
-		this.todasLasAtracciones = todasLasAtracciones;
+
+
+
+	public double getMonedas() {
+		return monedas;
+	}
+
+
+
+	public void setMonedas(double monedas) {
+		this.monedas = monedas;
+	}
+
+
+
+	public Integer getTiempo() {
+		return tiempo;
+	}
+
+
+
+	public void setTiempo(Integer tiempo) {
+		this.tiempo = tiempo;
+	}
+
+
+
+	public TipoAtraccion getPreferencia() {
+		return preferencia;
+	}
+
+
+
+	public void setPreferencia(TipoAtraccion preferencia) {
+		this.preferencia = preferencia;
+	}
+
+
+
+	public String getContrasenia() {
+		return contrasenia;
+	}
+
+
+
+	public void setContrasenia(String contrasenia) {
+		this.contrasenia = contrasenia;
+	}
+	
+	public boolean isAdmin(){
+		return this.admin ;
+	}
+	public void addToItinerary(Atraccion atraccion) {
+		this.monedas -= atraccion.getCosto();
+		this.tiempo -= atraccion.getTiempo();
+		// TODO agregar a su lista
+	}
+	public void addToItinerary(Promocion promocion) {
+		this.monedas -= promocion.getCosto();
+		this.tiempo-= promocion.getDuracion();
+		// TODO agregar a su lista
+	}
+
+	public boolean canAfford(Atraccion atraccion) {
+		return atraccion.getCosto() <= this.monedas;
+	}
+
+	public boolean canAttend(Atraccion atraccion) {
+		return atraccion.getTiempo() <= this.tiempo;
+
+}
+
+	public boolean canAffordPromo(Promocion Promocion) {
+		return Promocion.getCosto() <= this.monedas;
+	}
+
+	public boolean canAttendPromo(Promocion Promocion) {
+		return Promocion.getDuracion() <= this.tiempo;
 	}
 	@Override
 	public String toString() {
-		return nombre + ", presupuesto:" + presupuesto + ", tiempoDisponible:" + tiempoDisponible + ", Preferencia:"
-				+ tipoPreferido;
+		return "Usuario nombre=" + nombre + ", id=" + id + ", monedas=" + monedas + ", tiempo=" + tiempo
+				+ ", preferencia=" + preferencia + ", contrasenia=" + "****"+ ", admin=" + admin ;
 	}
-	public boolean acceso(List<Promocion> lista) {
-		boolean acceso = false;
-		for (Promocion i : lista) {
-			if (this.getPresupuesto() > i.getPrecio() && this.getTiempoDisponible() > i.getTiempoPromocion())
-				acceso = true;
-		}
-		return acceso;
-	} 
-
-	
-	
-	
 	
 }

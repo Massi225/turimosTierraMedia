@@ -5,12 +5,13 @@
 </head>
 <body>
 
+       
 	<jsp:include page="partials/nav.jsp"></jsp:include>
 
 	<main class="container">
 		<div class="bg-light p-4 rounded">
 			<h1>
-				¡Bienvenido, <c:out value="${user.username}" />!
+				¡Bienvenido, <c:out value="${usuario.nombre}" />!
 			</h1>
 		</div>
 	</main>

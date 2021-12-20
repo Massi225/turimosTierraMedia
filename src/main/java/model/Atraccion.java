@@ -1,133 +1,178 @@
 package model;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Comparator;
-
 import java.util.HashMap;
 import java.util.Map;
 
-public class Atraccion  {
-	private int idAtraccion;
+public class Atraccion {
+	private int id;
 	private String nombre;
-	private TipoAtraccion tipo;
-	private double precio;
-	private double duracion;
-	private int cupoPersonas;
+	private double costo;
+	private int tiempo;
+	private int cupo;
+	private TipoAtraccion tipo_atraccion;
+	private String descripcion;
+	private String imagen;
 
-	public Atraccion(int idAtraccion, String nombre, double precio, double duracion, int cupoPersonas,
-			TipoAtraccion tipo) {
-		this.idAtraccion = idAtraccion;
+	private Map<String, String> errors;
+	
+	public Atraccion(int id, String nombre, double costo, int tiempo, int cupo, TipoAtraccion tipo_atraccion,
+			String descripcion, String imagen) {
+		
+		this.id = id;
 		this.nombre = nombre;
-		this.tipo = tipo;
-		this.precio = precio;
-		this.duracion = duracion;
-		this.cupoPersonas = cupoPersonas;
+		this.costo = costo;
+		this.tiempo = tiempo;
+		this.cupo = cupo;
+		this.tipo_atraccion = tipo_atraccion;
+		this.descripcion = descripcion;
+		this.imagen = imagen;
 	}
 
-	public int getIdAtraccion() {
-		return idAtraccion;
-	}
+
 	
 
-	public List<TipoAtraccion> getListaTiposAtraccion() {
-		List<TipoAtraccion> listaTipoAtraccion = new ArrayList<TipoAtraccion>();
-		listaTipoAtraccion.add(tipo);
-		return listaTipoAtraccion;
+	public Atraccion(String nombre, double costo, int tiempo, int cupo, TipoAtraccion tipo_atraccion,
+			String descripcion, String imagen) {
+		super();
+		this.nombre = nombre;
+		this.costo = costo;
+		this.tiempo = tiempo;
+		this.cupo = cupo;
+		this.tipo_atraccion = tipo_atraccion;
+		this.descripcion = descripcion;
+		this.imagen = imagen;
+	}
+
+
+
+	
+	public boolean isValid() {
+		validate();
+		return errors.isEmpty();
 	}
 	
+	public void validate() {
+		errors = new HashMap<String, String>();
 
-	public boolean canHost(int i) {
-		return cupoPersonas >= i;
+		if (costo <= 0) {
+			errors.put("cost", "Debe ser positivo");
+		}
+		if (tiempo <= 0) {
+			errors.put("duration", "Debe ser positivo");
+		}
+		if (tiempo > 60) {
+			errors.put("duration", "Excede el tiempo máximo");
+		}
+		if (cupo <= 0) {
+			errors.put("capacity", "Debe ser positivo");
+		}
+		
 	}
 
-	public void host(int i) {
-		this.cupoPersonas -= i;
+	public Map<String, String> getErrors() {
+		return errors;
 	}
+
+
+
+	public Integer getId() {
+		return id;
+	}
+
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+
+	@Override
+	public String toString() {
+		return "Atraccion [id=" + id + ", nombre=" + nombre + ", costo=" + costo + ", tiempo=" + tiempo + ", cupo="
+				+ cupo + ", tipo_atraccion=" + tipo_atraccion 
+				+ "]";
+	}
+
+
+
 
 	public String getNombre() {
 		return nombre;
 	}
 
-	public TipoAtraccion getTipo() {
-		return tipo;
-	}
-
-	public double getPrecio() {
-		return precio;
-	}
-
-	public double getDuracion() {
-		return duracion;
-	}
-
-	public Double getPrecioObj() {
-		return precio;
-	}
-
-	public Double getDuracionOj() {
-		return duracion;
-	}
-
-	public int getCupoPersonas() {
-		return cupoPersonas;
-	}
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
 
-	public void setTipo(TipoAtraccion tipo) {
-		this.tipo = tipo;
+
+	public double getCosto() {
+		return costo;
 	}
 
-	public void setPrecio(double precio) {
-		this.precio = precio;
+
+	public void setCosto(double costo) {
+		this.costo = costo;
 	}
 
-	public void setDuracion(double duracion) {
-		this.duracion = duracion;
+
+	public Integer getTiempo() {
+		return tiempo;
 	}
 
-	public void setCupoPersonas() {
-		this.cupoPersonas -= 1;
+
+	public void setTiempo(Integer tiempo) {
+		this.tiempo = tiempo;
 	}
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(cupoPersonas, duracion, nombre, precio, tipo);
+
+	public Integer getCupo() {
+		return cupo;
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Atraccion other = (Atraccion) obj;
-		return cupoPersonas == other.cupoPersonas
-				&& Double.doubleToLongBits(duracion) == Double.doubleToLongBits(other.duracion)
-				&& Objects.equals(nombre, other.nombre)
-				&& Double.doubleToLongBits(precio) == Double.doubleToLongBits(other.precio) && tipo == other.tipo;
+
+	public void setCupo(Integer cupo) {
+		this.cupo = cupo;
 	}
 
-	@Override
-	public String toString() {
-		return nombre + " " + tipo + " " + "costo:" + " " + precio + " " + "duracion:" + " " + duracion + "hs" + " "
-				+ "cuposdisponibles:" + " " + cupoPersonas;
+
+	public TipoAtraccion getTipo_atraccion() {
+		return tipo_atraccion;
 	}
 
-	public int compareTo(Atraccion o2) {
-		int resultado = 0;
-		if (this.getPrecio() > o2.getPrecio()
-				|| this.getPrecio() == o2.getPrecio() && this.getDuracion() > o2.getDuracion())
-			resultado = 1;
-		else if (this.getPrecio() < o2.getPrecio())
-			resultado = -1;
-		return resultado;
+
+	public void setTipo_atraccion(TipoAtraccion tipo_atraccion) {
+		this.tipo_atraccion = tipo_atraccion;
 	}
+
+
+	public String getDescripcion() {
+		return descripcion;
+	}
+
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+
+
+	public String getImagen() {
+		return imagen;
+	}
+
+
+	public void setImagen(String imagen) {
+		this.imagen = imagen;
+	}
+
+	public boolean canHost(int i) {
+		return this.cupo >= i;
+	}
+
+	public void host(int i) {
+		this.cupo -= i;
+	}
+
 	
-}
+	}
+
+

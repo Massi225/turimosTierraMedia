@@ -3,39 +3,40 @@ package services;
 import java.util.HashMap;
 import java.util.Map;
 import model.Promocion;
-import model.Attraction;
-import model.User;
+import model.Atraccion;
+import model.Usuario;
 import persistence.PromocionDAO;
-import persistence.UserDAO;
+
+import persistence.UsuarioDAO;
 import persistence.commons.DAOFactory;
 
 public class BuyPromocionService {
 	
 	PromocionDAO promocionDAO = DAOFactory.getPromocionDAO();
-	UserDAO userDAO = DAOFactory.getUserDAO();
+	UsuarioDAO usuarioDAO = DAOFactory.getUsuarioDAO();
 
 	public Map<String, String> buy(Integer userId, Integer promocionId) {
 		Map<String, String> errors = new HashMap<String, String>();
 
-		User user = userDAO.find(userId);
+		Usuario user = usuarioDAO.find(userId);
 		Promocion promocion = promocionDAO.find(promocionId);
 
-		//if (!promocion.canHost(1)) {
-		//	errors.put("attraction", "No hay cupo disponible");
-		//}
+		if (!promocion.canHost(1)) {
+			errors.put("atraccion", "No hay cupo disponible");
+		}
 		if (!user.canAffordPromo(promocion)) {
-			errors.put("user", "No tienes dinero suficiente");
+			errors.put("usuario", "No tienes dinero suficiente");
 		}
 		if (!user.canAttendPromo(promocion)) {
-			errors.put("user", "No tienes tiempo suficiente");
+			errors.put("usuario", "No tienes tiempo suficiente");
 		}
 
 		if (errors.isEmpty()) {
 			user.addToItinerary(promocion);
-			//promocion.host(1);
+			promocion.host(1);
 
 			promocionDAO.update(promocion);
-			userDAO.update(user);
+			usuarioDAO.update(user);
 		}
 
 		return errors;

@@ -1,27 +1,25 @@
 package persistence.commons;
 
-import persistence.AttractionDAO;
+
+import persistence.AtraccionDAO;
 import persistence.PromocionDAO;
-import persistence.UserDAO;
-import persistence.impl.AtraccionesDao;
-import persistence.impl.AttractionDAOImpl;
+import persistence.UsuarioDAO;
+import persistence.impl.AtraccionDAOImpl;
+
 import persistence.impl.PromocionDAOImpl;
-import persistence.impl.UserDAOImpl;
+import persistence.impl.UsuarioDAOImpl;
 
 public class DAOFactory {
 
-	public static UserDAO getUserDAO() {
-		return new UserDAOImpl();
+	public static UsuarioDAO getUsuarioDAO() {
+		return new UsuarioDAOImpl();
 	}
 	
-	public static AttractionDAO getAttractionDAO() {
-		return new AttractionDAOImpl();
-	}
 	public static PromocionDAO getPromocionDAO() {
 		return new PromocionDAOImpl();
 }
-	public static AtraccionesDao getAtraccionesDAO() {
-		return new AtraccionesDao();
+	public static AtraccionDAO getAtraccionesDAO() {
+		return new AtraccionDAOImpl();
 }
 	
 	

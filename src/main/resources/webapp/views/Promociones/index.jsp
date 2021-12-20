@@ -65,7 +65,7 @@ prefix="c"%>
         <h1>Estas son las Promociones de la Tierra Media</h1>
       </div>
 
-      <c:if test="${user.isAdmin()}">
+      <c:if test="${usuario.isAdmin()}">
         <div class="mb-3">
           <a
             href="/turimosTierraMedia/promociones/create.do"
@@ -90,24 +90,23 @@ prefix="c"%>
                   <c:out value="${promocion.costo}"></c:out>
                  
                 </li>
-                <li>Duracion: <c:out value="${promocion.tiempo}"></c:out></li>
+                <li>Duracion: <c:out value="${promocion.duracion}"></c:out></li>
                 <li>
-                  Tipo de Atracciones:
-                  <c:out value="${promocion.tipoAtraccion}"></c:out>
+                  
                 </li>
               
               </ul>
             </div>
             <div class="botones">
-              <c:if test="${user.admin}">
+              <c:if test="${usuario.admin}">
                 <a
-                  href="/turimosTierraMedia/promociones/edit.do?id=${promocion.idPromocion}"
+                  href="/turimosTierraMedia/promociones/edit.do?id=${promocion.id}"
                   class="btn btn-secondary rounded"
                   role="button"
                   ><i class="bi bi-pencil-fill"></i>Editar</a
                 >
                 <a
-                  href="/turimosTierraMedia/promociones/delete.do?id=${promocion.idPromocion}"
+                  href="/turimosTierraMedia/promociones/delete.do?id=${promocion.id}"
                   class="btn btn-danger rounded"
                   role="button"
                   ><i class="bi bi-x-circle-fill"></i>Eliminar</a
@@ -116,7 +115,7 @@ prefix="c"%>
              
 							<c:choose>
 								<c:when
-									test="${user.canAffordPromo(promocion) && user.canAttendPromo(promocion) }">
+									test="${usuario.canAffordPromo(promocion) && usuario.canAttendPromo(promocion) }">
 									<a href="/turimosTierraMedia/promociones/buy.do?id=${promocion.id}"
 										class="btn btn-success rounded" role="button">Comprar</a>
 								</c:when>

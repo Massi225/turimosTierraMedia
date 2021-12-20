@@ -13,16 +13,11 @@ import persistence.commons.DAOFactory;
 import persistence.commons.GenericDAO;
 import persistence.commons.MissingDataException;
 import model.Atraccion;
-	import model.PromoPorcentual;
-	import model.PromocionAbsoluta;
-	import model.PromocionAxB;
-	import model.Promocion;
-	import model.TipoAtraccion;
-import model.User;
+import model.Promocion;
+import model.TipoAtraccion;
 import model.Usuario;
-
-import model.nullobjects.NullUser;
-import persistence.impl.AtraccionesDao;
+import model.nullobjects.NullUsuario;
+import persistence.AtraccionDAO;
 
 	public class PromocionDAOImpl implements PromocionDAO {
 		
@@ -31,7 +26,7 @@ import persistence.impl.AtraccionesDao;
 			try {
 			
 			Connection connection = ConnectionProvider.getConnection();
-			String query = "SELECT * FROM promociones JOIN tipo_atraccion ON tipo_atraccion.id_tipo = promociones.tipo_atraccion ";
+			String query = "SELECT * FROM promociones  ";
 			PreparedStatement preparedStatement = connection.prepareStatement(query);
 			ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -45,41 +40,45 @@ import persistence.impl.AtraccionesDao;
 		}
 
 		private Promocion toPromocion(ResultSet resultSet) throws SQLException {
-			String tipoPromocion = String.valueOf(resultSet.getString("tipo_promocion"));
-
+			int id = resultSet.getInt("id");
 			String nombrePromo = String.valueOf(resultSet.getString("nombre"));
-
-			TipoAtraccion tipoAtraccion = TipoAtraccion.valueOf(resultSet.getString("tipo"));
-
-			AtraccionesDao atr = DAOFactory.getAtraccionesDAO();
+			String atraccion1 = String.valueOf(resultSet.getString("atraccion1"));
+			String atraccion2 = String.valueOf(resultSet.getString("atraccion2"));
+			// int tipo_atraccion =Integer.valueOf(resultSet.getString("tipo_atracciones"));
+			double bonificacion =resultSet.getDouble("bonificacion");
+			String atraccionGratis = resultSet.getString("atraccionGratis");
+			String tipo_promocion = resultSet.getString("tipo_promocion");
+		/*	TipoAtraccion tipoAtraccionString= null;
+			if (tipo_atraccion == 1) {
+				tipoAtraccionString = TipoAtraccion.AVENTURA;
+		 }
+			if (tipo_atraccion == 2) {
+				tipoAtraccionString = TipoAtraccion.PAISAJE;
+		 }
+			if (tipo_atraccion == 3) {
+				tipoAtraccionString= TipoAtraccion.DEGUSTACION;
+			}
+			*/
+			
+			AtraccionDAO atr = DAOFactory.getAtraccionesDAO();
 
 			List<Atraccion> atracIncluidas = new ArrayList<Atraccion>();
 
 			;
 			
-			if (resultSet.getString(3) != null) {
-				atracIncluidas.add( atr.findByName2(resultSet.getString(3)));
+			if (atraccion1 != null) {
+				atracIncluidas.add( atr.find1(resultSet.getString("atraccion1")));
 			}
-			if (resultSet.getString(4) != null) {
-				atracIncluidas.add(atr.findByName2(resultSet.getString(4)));
+			if (atraccion2 != null) {
+				atracIncluidas.add(atr.find1(resultSet.getString("atraccion2")));
 			}
-			Promocion promocion = null;
+		    if (atraccionGratis != null) {
+				atracIncluidas.add(atr.find1(resultSet.getString("atraccionGratis")));
+			}
 			
-		if (tipoPromocion.equalsIgnoreCase("porcentual")) {
-
-	          promocion = new PromoPorcentual(resultSet.getInt("id_promocion"), atracIncluidas, resultSet.getDouble(6),
-						nombrePromo, tipoAtraccion);
-						
-			} else if (tipoPromocion.equalsIgnoreCase("AxB")) {
-
-				Atraccion ataxb =  atr.findByName2(resultSet.getString(9));
-				 promocion = new PromocionAxB(resultSet.getInt("id_promocion"), atracIncluidas, ataxb, nombrePromo,
-						tipoAtraccion);
-			} else if (tipoPromocion.equalsIgnoreCase("Absoluta")) {
-
-				promocion = new PromocionAbsoluta(resultSet.getInt("id_promocion"), atracIncluidas, resultSet.getDouble(7),
-						nombrePromo, tipoAtraccion);
-		}
+		    Promocion promocion = new Promocion(id,nombrePromo,tipo_promocion , bonificacion ,atracIncluidas);
+			
+		
 			return promocion;
 		}
 
@@ -90,8 +89,7 @@ import persistence.impl.AtraccionesDao;
 				List<Promocion> promociones = new ArrayList<Promocion>();
 			
 			Connection connection = ConnectionProvider.getConnection();
-			String query = "SELECT * FROM promociones "
-					+ "JOIN tipo_atraccion ON tipo_atraccion.id_tipo = promociones.tipo_atraccion WHERE promociones.nombre LIKE ? ";
+			String query = "SELECT * FROM promociones  WHERE promociones.nombre LIKE ? ";
 			PreparedStatement statement = connection.prepareStatement(query);
 			statement.setString(1, nombre);
 			ResultSet resultSet = statement.executeQuery();
@@ -136,12 +134,12 @@ import persistence.impl.AtraccionesDao;
 			return 0;
 		}
 		
-		public Promocion find(Integer id_promocion) {
+		public Promocion find(Integer id) {
 			try {
-				String sql = "SELECT * FROM PROMOCIONES JOIN tipo_atraccion ON tipo_atraccion.id_tipo = promociones.tipo_atraccion WHERE id_promocion = ? ";
+				String sql = "SELECT * FROM PROMOCIONES  WHERE id = ? ";
 				Connection conn = ConnectionProvider.getConnection();
 				PreparedStatement statement = conn.prepareStatement(sql);
-				statement.setInt(1, id_promocion);
+				statement.setInt(1, id);
 				ResultSet resultados = statement.executeQuery();
 
 				Promocion promocion = null;
