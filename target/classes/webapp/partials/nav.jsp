@@ -21,22 +21,22 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
       <ul class="navbar-nav me-auto mb-2 mb-md-0" style="margin-left: 30px">
-        <li class="nav-item">
-          <a
-            style="color: #fff"
-            class="nav-link active"
-            aria-current="page"
-            href="/turimosTierraMedia/promociones/index.do"
-            >Promociones</a
-          >
-        </li>
-        <li class="nav-item">
+       <li class="nav-item">
           <a
             style="color: #fff"
             class="nav-link active"
             aria-current="page"
             href="/turimosTierraMedia/atracciones/index.do"
             >Atracciones</a
+          >
+        </li>
+         <li class="nav-item">
+          <a
+            style="color: #fff"
+            class="nav-link active"
+            aria-current="page"
+            href="/turimosTierraMedia/promociones/index.do"
+            >Promociones</a
           >
         </li>
         <c:if test="${usuario.isAdmin()}">

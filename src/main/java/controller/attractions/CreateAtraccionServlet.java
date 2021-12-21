@@ -37,14 +37,14 @@ public class CreateAtraccionServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String nombre = req.getParameter("nombre");
-		Double costo = Double.parseDouble(req.getParameter("costo"));
+		double costo = Double.parseDouble(req.getParameter("costo"));
 		int tiempo = Integer.parseInt(req.getParameter("tiempo"));
-		Integer cupo= Integer.parseInt(req.getParameter("cupo"));
+		int cupo= Integer.parseInt(req.getParameter("cupo"));
 		String descripcion = req.getParameter("descripcion");
-		int tipoAtraccion = Integer.parseInt(req.getParameter("tipo_atraccion"));
+		TipoAtraccion tipoAtraccionString =TipoAtraccion.valueOf(req.getParameter("tipo_atraccion"));
         String imagen = req.getParameter("imagen");
         
-        TipoAtraccion tipoAtraccionString= null;
+       /* TipoAtraccion tipoAtraccionString= null;
     	if (tipoAtraccion == 1) {
     		tipoAtraccionString = TipoAtraccion.AVENTURA;
      }
@@ -54,7 +54,7 @@ public class CreateAtraccionServlet extends HttpServlet {
     	if (tipoAtraccion == 3) {
     		tipoAtraccionString= TipoAtraccion.DEGUSTACION;
      }
-
+*/
 
 		Atraccion atraccion = atraccionService.create(nombre, costo, tiempo, cupo ,tipoAtraccionString, descripcion, imagen);
 		

@@ -1,12 +1,12 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <div class="mb-3">
-	<label for="name" class="col-form-label">Nombre:</label> <input
+	<label for="nombre" class="col-form-label">Nombre:</label> <input
 		type="text" class="form-control" id="nombre" name="nombre"
 		required value="${atraccion.nombre}">
 </div>
 <div class="mb-3">
-	<label for="cost"
+	<label for="costo"
 		class='col-form-label ${atraccion.errors.get("costo") != null ? "is-invalid" : "" }'>Costo:</label>
 	<input class="form-control" type="number" id="costo" name="costo"
 		required value="${atraccion.costo}"></input>
@@ -15,7 +15,7 @@
 	</div>
 </div>
 <div class="mb-3">
-	<label for="duration"
+	<label for="tiempo"
 		class='col-form-label ${atraccion.errors.get("tiempo") != null ? "is-invalid" : "" }'>Duracion:</label>
 	<input class="form-control" type="number" id="tiempo" name="tiempo"
 		required value="${atraccion.tiempo}"></input>
@@ -24,21 +24,29 @@
 	</div>
 </div>
 <div class="mb-3">
-	<label for="capacity"
-		class='col-form-label ${atraccion.errors.get("cupos") != null ? "is-invalid" : "" }'>Cupo:</label>
-	<input class="form-control" type="number" id="cupos" name="cupos"
-		required value="${atraccion.cupos}"></input>
+	<label for="cupo"
+		class='col-form-label ${atraccion.errors.get("cupo") != null ? "is-invalid" : "" }'>Cupo:</label>
+	<input class="form-control" type="number" id="cupo" name="cupo"
+		required value="${atraccion.cupo}"></input>
 	<div class="invalid-feedback">
-		<c:out value='${atraccion.errors.get("cupos")}'></c:out>
+		<c:out value='${atraccion.errors.get("cupo")}'></c:out>
+	</div>
+	<div class="mb-3">
+	<label for="tipo_atraccion"
+		class='col-form-label ${atraccion.errors.get("tipoAtraccion") != null ? "is-invalid" : "" }'>Tipo de Atraccion:</label>
+	<input class="form-control" type="text" id="tipo_atraccion" name="tipo_atraccion"
+		required value="${atraccion.tipo_atraccion}"></input>
+	<div class="invalid-feedback">
+		<c:out value='${atraccion.errors.get("tipo_atraccion")}'></c:out>
 	</div>
 </div>
 <div class="mb-3">
-	<label for="description" class="col-form-label">Descripcion:</label> <input
+	<label for="descripcion" class="col-form-label">Descripcion:</label> <input
 		type="text" class="form-control" id="descripcion" name="descripcion"
 		required value="${atraccion.descripcion}">
 </div>
 <div class="mb-3">
-	<label for="image" class="col-form-label">Url Imagen</label> <input
+	<label for="imagen" class="col-form-label">Url Imagen</label> <input
 		type="text" class="form-control" id="imagen" name="imagen"
 		required value="${atraccion.imagen}">
 </div>

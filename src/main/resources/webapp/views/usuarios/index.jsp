@@ -16,7 +16,7 @@ prefix="c"%>
           position: relative;
           flex-direction: column;
           width: 400px;
-          height: 300px;
+          height: 500px;
           border: 1px solid grey;
         }
         .name {
@@ -84,10 +84,10 @@ prefix="c"%>
       <div class="cards-container">
         <c:forEach items="${usuarios}" var="tmp_user">
         <div class="card">
+         <img src="<c:out value="${tmp_user.imagen}"></c:out>" alt="foto de usuario" class="img-usuario"  height="300" width="400"> 
              <div class="data">
                  <h3 class="name"><c:out value="${tmp_user.nombre}"></c:out></h3>
-                  <img src="<c:out value="${tmp_user.imagen}"></c:out>" alt="foto de atraccion" class="img-atraccion"> 
-                 <ul class="data-list">
+                     <ul class="data-list">
                      <li>Monedas: <c:out value="${tmp_user.monedas}"></c:out></li>
                      <li>Tiempo: <c:out value="${tmp_user.tiempo}"></c:out></li>
                      <li>Rol: 
@@ -100,7 +100,7 @@ prefix="c"%>
                 </div>   
                 <div class="botones">
                     <c:if
-                    test="${usuario.admin && (!tmp_user.admin || tmp_user.id == usurio.id)}"
+                    test="${usuario.admin && (!tmp_user.admin || tmp_user.id == usuario.id)}"
                   >
                     
                     <a

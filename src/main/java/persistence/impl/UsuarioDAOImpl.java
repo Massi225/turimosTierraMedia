@@ -19,18 +19,22 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 
 	public int insert(Usuario user) {
 		try {
-			String sql = "INSERT INTO USUARIOS (NOMBRE, MONEDAS, TIEMPO, PREFERENCIA, CONTRASENIA , IMAGEN) VALUES (?, ?, ?, ?, ? ,?)";
+			String sql = "INSERT INTO USUARIOS (NOMBRE, MONEDAS, TIEMPO, PREFERENCIA, CONTRASENIA , IMAGEN ,ADMIN) VALUES (?, ?, ?, ?, ? ,?,?)";
 			Connection conn = ConnectionProvider.getConnection();
 
 			int tipo = 0;
-if (user.getPreferencia().equals(TipoAtraccion.AVENTURA)) {
+if (user.getPreferencia()==(TipoAtraccion.AVENTURA)) {
 	tipo = 1;
 }
-if (user.getPreferencia().equals(TipoAtraccion.PAISAJE)) {
+if (user.getPreferencia()==(TipoAtraccion.PAISAJE)) {
 	tipo = 2;
 }
-if (user.getPreferencia().equals(TipoAtraccion.DEGUSTACION)) {
+if (user.getPreferencia()==(TipoAtraccion.DEGUSTACION)) {
 	tipo = 3;
+}
+  int admin=0;
+if(user.getAdmin() == true) {
+	admin=1;
 }
 		
 			PreparedStatement statement = conn.prepareStatement(sql);
@@ -40,6 +44,7 @@ if (user.getPreferencia().equals(TipoAtraccion.DEGUSTACION)) {
 			statement.setInt(4, tipo);
 			statement.setString(5, user.getContrasenia());
 			statement.setString(6, user.getImagen());
+			statement.setDouble(7, admin);
 			int rows = statement.executeUpdate();
 
 			return rows;
@@ -67,11 +72,11 @@ if (user.getPreferencia().equals(TipoAtraccion.DEGUSTACION)) {
 
 	public int delete(Usuario user) {
 		try {
-			String sql = "DELETE FROM USUARIOS WHERE NOMBRE = ?";
+			String sql = "DELETE FROM USUARIOS WHERE ID = ?";
 			Connection conn = ConnectionProvider.getConnection();
 
 			PreparedStatement statement = conn.prepareStatement(sql);
-			statement.setString(1, user.getNombre());
+			statement.setInt(1, user.getId());
 			int rows = statement.executeUpdate();
 
 			return rows;

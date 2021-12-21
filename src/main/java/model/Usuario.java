@@ -64,9 +64,9 @@ public class Usuario {
 		if (tiempo < 0) {
 			errors.put("tiempo", "No debe ser negativo");
 		}
-		if(contrasenia.length()> 4) {
-			errors.put(contrasenia,"No debe tener menos de 4 caracteres");
-		}
+		//if(contrasenia.length()> 4) {
+	//		errors.put(contrasenia,"No debe tener menos de 4 caracteres");
+	//	}
 	}
 
 
@@ -189,7 +189,7 @@ public class Usuario {
 	@Override
 	public String toString() {
 		return "Usuario nombre=" + nombre + ", id=" + id + ", monedas=" + monedas + ", tiempo=" + tiempo
-				+ ", preferencia=" + preferencia + ", contrasenia=" + "****"+ ", admin=" + admin ;
+				+ ", preferencia=" + preferencia + ", contrasenia=" + "****"+ ", admin=" + admin + " " +imagen;
 	}
 	
 }

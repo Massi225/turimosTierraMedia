@@ -16,7 +16,7 @@ public class UsuarioService {
 	}
 
 	public Usuario create(String nombre, double monedas, int tiempo, TipoAtraccion tipoAtraccion, String contrasenia, boolean admin , String imagen ) {
-		Usuario usuario = new Usuario(-1, nombre, monedas, tiempo, tipoAtraccion, contrasenia, false , imagen);
+		Usuario usuario = new Usuario(-1, nombre, monedas, tiempo, tipoAtraccion, contrasenia, admin, imagen);
 		usuario.setContrasenia(contrasenia);
 
 		if (usuario.isValid()) {

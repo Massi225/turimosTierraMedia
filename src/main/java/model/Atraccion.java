@@ -55,18 +55,20 @@ public class Atraccion {
 		errors = new HashMap<String, String>();
 
 		if (costo <= 0) {
-			errors.put("cost", "Debe ser positivo");
+			errors.put("tiempo", "Debe ser positivo");
 		}
 		if (tiempo <= 0) {
-			errors.put("duration", "Debe ser positivo");
+			errors.put("tiempo", "Debe ser positivo");
 		}
 		if (tiempo > 60) {
-			errors.put("duration", "Excede el tiempo máximo");
+			errors.put("tiempo", "Excede el tiempo máximo");
 		}
 		if (cupo <= 0) {
-			errors.put("capacity", "Debe ser positivo");
+			errors.put("cupo", "Debe ser positivo");
 		}
-		
+		if(tipo_atraccion == TipoAtraccion.AVENTURA ||tipo_atraccion == TipoAtraccion.DEGUSTACION || tipo_atraccion == TipoAtraccion.PAISAJE ) {
+			errors.put("tipo_Atraccion", " Debe ser   Aventura ,  Paisaje   y/o Degustacion");
+		}
 	}
 
 	public Map<String, String> getErrors() {
@@ -75,12 +77,12 @@ public class Atraccion {
 
 
 
-	public Integer getId() {
+	public int getId() {
 		return id;
 	}
 
 
-	public void setId(Integer id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
