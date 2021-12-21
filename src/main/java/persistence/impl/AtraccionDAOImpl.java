@@ -140,59 +140,91 @@ import model.Atraccion;
 			return 0;
 		}
 		@Override
-		public int insert(Atraccion t) {
-			// TODO Auto-generated method stub
-			return 0;
+		public int insert(Atraccion atraccion)  {
+			try{
+				String sqlQuery = "INSERT INTO atracciones (nombre,costo,tiempo,cupo,tipo_atraccion) " + "VALUES (?,?,?,?,?)";
+			Connection connection = ConnectionProvider.getConnection();
+			PreparedStatement statement = connection.prepareStatement(sqlQuery);
+			int tipo = 0;
+if (atraccion.getTipo_atraccion()==(TipoAtraccion.AVENTURA)) {
+	tipo = 1;
+}
+if (atraccion.getTipo_atraccion()==(TipoAtraccion.PAISAJE)) {
+	tipo = 2;
+}
+if (atraccion.getTipo_atraccion()==(TipoAtraccion.DEGUSTACION)) {
+	tipo = 3;
+}
+			statement.setString(1, atraccion.getNombre());
+			statement.setDouble(2, atraccion.getCosto());
+			statement.setDouble(3, atraccion.getTiempo());
+			statement.setInt(4, atraccion.getCupo());
+			statement.setInt(5, tipo);
+			
+
+
+			int rowsUpdated = statement.executeUpdate();
+			return rowsUpdated;
+		}catch (Exception e) {
+			throw new MissingDataException(e);
 		}
-		@Override
-		public int update(Atraccion t) {
-			// TODO Auto-generated method stub
-			return 0;
-		}
-		@Override
-		public int delete(Atraccion t) {
-			// TODO Auto-generated method stub
-			return 0;
-		}
+	}
 		
-/*
-		public int insert(Atraccion atraccion) throws SQLException {
-			String sqlQuery = "INSERT INTO atracciones (nombre,costo,tiempo,cupo,tipo) " + "VALUES (?,?,?,?,?)";
+		@Override
+		
+
+
+		public int update(Atraccion atraccion)  {
+		
+			try {
+				String sqlQuery = "UPDATE atraccion" + "WHERE id = ?" + "SET nombre = ?, " + "COSTO = ?, " + "tiempo = ?,"
+					+ "CUPO = ?"+ "tipo_atraccion = ?" + " descripcion = ?";
 			Connection connection = ConnectionProvider.getConnection();
 			PreparedStatement statement = connection.prepareStatement(sqlQuery);
-
-			statement.setString(1, atraccion.getNombre());
-			statement.setDouble(2, atraccion.getPrecio());
-			statement.setDouble(3, atraccion.getDuracion());
-			statement.setInt(4, atraccion.getCupoPersonas());
-			statement.setInt(5, atraccion.getTipo().ordinal() + 1);
-
-			int rowsUpdated = statement.executeUpdate();
-			return rowsUpdated;
-		}
-
-		public int delete(Atraccion atraccion) throws SQLException {
-			String sqlDeleteQuery = "DELETE FROM atracciones WHERE atracciones.nombre LIKE ? ";
-			Connection connection = ConnectionProvider.getConnection();
-			PreparedStatement statement = connection.prepareStatement(sqlDeleteQuery);
-			statement.setString(1, atraccion.getNombre());
-			int rowsUpdated = statement.executeUpdate();
-			return rowsUpdated;
-		}
-
-		public int update(Atraccion atraccion) throws SQLException {
-			String sqlQuery = "UPDATE atraccion" + "WHERE id = ?" + "SET nombre = ?, " + "presupuesto = ?, " + "tiempo = ?,"
-					+ "atraccion_preferida = ?";
-			Connection connection = ConnectionProvider.getConnection();
-			PreparedStatement statement = connection.prepareStatement(sqlQuery);
-			statement.setString(1, atraccion.getNombre());
-			statement.setDouble(2, atraccion.getPrecio());
-			statement.setDouble(3, atraccion.getDuracion());
-			statement.setInt(4, atraccion.getCupoPersonas());
-			statement.setInt(5, atraccion.getTipo().ordinal() + 1);
+			
+			int tipo = 0;
+if (atraccion.getTipo_atraccion()==(TipoAtraccion.AVENTURA)) {
+	tipo = 1;
+}
+if (atraccion.getTipo_atraccion()==(TipoAtraccion.PAISAJE)) {
+	tipo = 2;
+}
+if (atraccion.getTipo_atraccion()==(TipoAtraccion.DEGUSTACION)) {
+	tipo = 3;
+}
+			
+			statement.setInt(1, atraccion.getId());
+			
+			statement.setString(2, atraccion.getNombre());
+			statement.setDouble(3, atraccion.getCosto());
+			statement.setDouble(4, atraccion.getTiempo());
+			statement.setInt(5, atraccion.getCupo());
+			statement.setInt(6, tipo);
+			statement.setString(7, atraccion.getDescripcion());
 			int rowsUpdate = statement.executeUpdate();
 			return rowsUpdate;
+			}catch (Exception e) {
+			throw new MissingDataException(e);
+		}	
+
 		}
+		@Override
+		public int delete(Atraccion atraccion) {
+			try {
+			String sqlDeleteQuery = "DELETE FROM atracciones WHERE ID = ? ";
+			Connection connection = ConnectionProvider.getConnection();
+			PreparedStatement statement = connection.prepareStatement(sqlDeleteQuery);
+			statement.setInt(1, atraccion.getId());
+			int rowsUpdated = statement.executeUpdate();
+			return rowsUpdated;
+		}catch (Exception e) {
+			throw new MissingDataException(e);
+		}
+	}
+	}
+		
+/*
+
 
 		public int countAll() throws SQLException {
 			String sqlQuery = "SELECT COUNT() AS total " + "FROM atracciones ";
@@ -204,6 +236,6 @@ import model.Atraccion;
 			return total;
 		}
 	*/
-	}
+	
 
 

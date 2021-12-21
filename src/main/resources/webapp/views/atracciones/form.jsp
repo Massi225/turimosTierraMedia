@@ -32,19 +32,16 @@
 		<c:out value='${atraccion.errors.get("cupo")}'></c:out>
 	</div>
 	<div class="mb-3">
-	<label for="tipo_atraccion"
-		class='col-form-label ${atraccion.errors.get("tipoAtraccion") != null ? "is-invalid" : "" }'>Tipo de Atraccion:</label>
-	<input class="form-control" type="text" id="tipo_atraccion" name="tipo_atraccion"
-		required value="${atraccion.tipo_atraccion}"></input>
-	<div class="invalid-feedback">
-		<c:out value='${atraccion.errors.get("tipo_atraccion")}'></c:out>
-	</div>
-</div>
-<div class="mb-3">
 	<label for="descripcion" class="col-form-label">Descripcion:</label> <input
 		type="text" class="form-control" id="descripcion" name="descripcion"
 		required value="${atraccion.descripcion}">
 </div>
+
+<div class="mb-3">
+	<label for="tipo_atraccion" class="col-form-label">Tipo de Atraccion:  ( 1: Aventura , 2: Paisaje , 3: Desgustacion)</label> <input
+		type="text" class="form-control" id="tipo_atraccion" name="tipo_atraccion"
+		required value="${atraccion.tipo_atraccion}">
+		</div>
 <div class="mb-3">
 	<label for="imagen" class="col-form-label">Url Imagen</label> <input
 		type="text" class="form-control" id="imagen" name="imagen"

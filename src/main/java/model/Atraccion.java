@@ -66,9 +66,9 @@ public class Atraccion {
 		if (cupo <= 0) {
 			errors.put("cupo", "Debe ser positivo");
 		}
-		if(tipo_atraccion == TipoAtraccion.AVENTURA ||tipo_atraccion == TipoAtraccion.DEGUSTACION || tipo_atraccion == TipoAtraccion.PAISAJE ) {
-			errors.put("tipo_Atraccion", " Debe ser   Aventura ,  Paisaje   y/o Degustacion");
-		}
+		//if(tipo_atraccion == TipoAtraccion.AVENTURA ||tipo_atraccion == TipoAtraccion.DEGUSTACION || tipo_atraccion == TipoAtraccion.PAISAJE ) {
+			//errors.put("tipo_Atraccion", " Debe ser   Aventura ,  Paisaje   y/o Degustacion");
+	//	}
 	}
 
 	public Map<String, String> getErrors() {

@@ -41,10 +41,10 @@ public class CreateAtraccionServlet extends HttpServlet {
 		int tiempo = Integer.parseInt(req.getParameter("tiempo"));
 		int cupo= Integer.parseInt(req.getParameter("cupo"));
 		String descripcion = req.getParameter("descripcion");
-		TipoAtraccion tipoAtraccionString =TipoAtraccion.valueOf(req.getParameter("tipo_atraccion"));
+		int tipoAtraccion =Integer.parseInt(req.getParameter("tipo_atraccion"));
         String imagen = req.getParameter("imagen");
         
-       /* TipoAtraccion tipoAtraccionString= null;
+        TipoAtraccion tipoAtraccionString= null;
     	if (tipoAtraccion == 1) {
     		tipoAtraccionString = TipoAtraccion.AVENTURA;
      }
@@ -54,7 +54,7 @@ public class CreateAtraccionServlet extends HttpServlet {
     	if (tipoAtraccion == 3) {
     		tipoAtraccionString= TipoAtraccion.DEGUSTACION;
      }
-*/
+
 
 		Atraccion atraccion = atraccionService.create(nombre, costo, tiempo, cupo ,tipoAtraccionString, descripcion, imagen);
 		

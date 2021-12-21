@@ -37,6 +37,7 @@ public class AtraccionService {
 		atraccion.setCosto(costo);
 		atraccion.setTiempo(tiempo);
 		atraccion.setCupo(cupo);
+		atraccion.setTipo_atraccion(tipo);
 		atraccion.setImagen(imagen);
 		atraccion.setDescripcion(descripcion);
 

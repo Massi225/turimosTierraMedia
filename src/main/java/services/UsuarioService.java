@@ -21,7 +21,7 @@ public class UsuarioService {
 
 		if (usuario.isValid()) {
 			DAOFactory.getUsuarioDAO().insert(usuario);
-			// XXX: si no devuelve "1", es que hubo más errores
+			
 		}
 
 		return usuario;
@@ -39,6 +39,8 @@ public class UsuarioService {
 	public Usuario find(Integer id) {
 		return DAOFactory.getUsuarioDAO().find(id);
 	}
-
+	public Usuario update(int id, String nombre,double costo,int tiempo,int cupo, TipoAtraccion tipoAtraccionString ,String descripcion ,String imagen) {
+		
+	}
 }
 
